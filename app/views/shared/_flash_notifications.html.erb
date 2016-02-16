@@ -1,0 +1,11 @@
+<div class="flash-messages">
+  <% flash.each do |key, message| %>
+    <% css_class = key %>
+    <% css_class = 'danger' if %w(alert error errors).include?(key) %>
+    <% css_class = 'success' if key == 'notice' %>
+
+    <div class="text-center alert alert-<%= css_class %>">
+      <%= message.html_safe %>
+    </div>
+  <% end %>
+</div>
