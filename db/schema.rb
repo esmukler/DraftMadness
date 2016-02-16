@@ -11,13 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213000034) do
+ActiveRecord::Schema.define(version: 20160214225757) do
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "school1_id"
+    t.integer  "school2_id"
+    t.integer  "round",                           null: false
+    t.datetime "start_time",                      null: false
+    t.boolean  "is_over",         default: false, null: false
+    t.integer  "next_game_id"
+    t.integer  "winning_team_id"
+    t.integer  "losing_team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "leagues", force: :cascade do |t|
     t.string   "name",            null: false
     t.string   "description"
     t.integer  "commissioner_id", null: false
     t.string   "password",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "owner_schools", force: :cascade do |t|
+    t.integer  "owner_id",   null: false
+    t.integer  "school_id",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,6 +58,13 @@ ActiveRecord::Schema.define(version: 20160213000034) do
     t.string   "primary_color",   default: "#000000", null: false
     t.string   "secondary_color", default: "#fff",    null: false
     t.integer  "seed_id",                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",      null: false
+    t.string   "password",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
