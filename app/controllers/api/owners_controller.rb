@@ -1,4 +1,4 @@
-class OwnersController < ApplicationController
+class Api::OwnersController < ApplicationController
   def index
     @league = League.find(params[:id])
     @owners = @league.owners
@@ -20,7 +20,7 @@ class OwnersController < ApplicationController
   end
 
   def show
-    @owners = Owner.find(params[:id])
+    @owner = Owner.find(params[:id])
   end
 
   private

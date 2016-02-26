@@ -1,5 +1,5 @@
 class Owner < ActiveRecord::Base
-  validates :team_name, :user, :league, presence: true
+  validates :team_name, :user_id, :league_id, presence: true
 
   belongs_to :user
   belongs_to :league
