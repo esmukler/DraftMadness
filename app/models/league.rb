@@ -1,5 +1,5 @@
 class League < ActiveRecord::Base
-  validates :name, :password, :commissioner, presence: true
+  validates :name, presence: true
 
   belongs_to :commissioner, class_name: 'Owner'
   has_many :owners

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216042645) do
+ActiveRecord::Schema.define(version: 20160301000810) do
 
   create_table "games", force: :cascade do |t|
     t.integer  "school1_id"
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20160216042645) do
   create_table "leagues", force: :cascade do |t|
     t.string   "name",            null: false
     t.string   "description"
-    t.integer  "commissioner_id", null: false
-    t.string   "password",        null: false
+    t.integer  "commissioner_id"
+    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20160216042645) do
 
   create_table "owners", force: :cascade do |t|
     t.integer  "user_id",    null: false
-    t.integer  "league_id",  null: false
+    t.integer  "league_id"
     t.string   "team_name",  null: false
     t.string   "motto"
     t.integer  "draft_pick"
@@ -54,10 +54,18 @@ ActiveRecord::Schema.define(version: 20160216042645) do
 
   create_table "schools", force: :cascade do |t|
     t.string   "name",                                null: false
-    t.string   "mascot",                              null: false
+    t.string   "mascot"
     t.string   "primary_color",   default: "#000000", null: false
     t.string   "secondary_color", default: "#fff",    null: false
     t.integer  "seed_id",                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "seeds", force: :cascade do |t|
+    t.integer  "seed_number",                  null: false
+    t.string   "region",                       null: false
+    t.boolean  "play_in_game", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

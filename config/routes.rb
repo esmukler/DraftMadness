@@ -5,6 +5,17 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :owners
-    resources :schools
+
+    resources :schools do
+      collection do
+        get 'bracket'
+      end
+    end
+
+    resources :leagues do
+      get 'standings'
+    end
+
+    resources :owner_schools, only: %i(create destroy)
   end
 end

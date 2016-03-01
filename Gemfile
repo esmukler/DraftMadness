@@ -20,11 +20,14 @@ gem 'jbuilder', '~> 2.0'
 # authentication
 gem 'devise', '~> 3.4.0'
 gem 'omniauth'
-gem 'rails-api'
+gem 'omniauth-google-oauth2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-rails'
+  gem 'quiet_assets'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'

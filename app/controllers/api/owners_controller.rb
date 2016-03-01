@@ -4,23 +4,16 @@ class Api::OwnersController < ApplicationController
     @owners = @league.owners
   end
 
-  def new
-    @owner = Owner.new
-  end
-
   def create
-    @owner = Owner.new(owner_params)
-
-    if @owner.save
-      render :show
-    else
-      flash[:error] = @owner.errors.full_messages.join(', ')
-      redirect_to :new
-    end
+    @owner = Owner.create(owner_params)
   end
 
   def show
     @owner = Owner.find(params[:id])
+  end
+
+  def update
+    @owner.update(owner_params)
   end
 
   private

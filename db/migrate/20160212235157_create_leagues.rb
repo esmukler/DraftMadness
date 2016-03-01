@@ -2,9 +2,9 @@ class CreateLeagues < ActiveRecord::Migration
   def change
     create_table :leagues do |t|
       t.string  :name,            null: false
-      t.string  :description
-      t.integer :commissioner_id, null: false
-      t.string  :password,        null: false
+      t.text    :description
+      t.integer :commissioner_id
+      t.string  :password
 
       t.timestamps
     end

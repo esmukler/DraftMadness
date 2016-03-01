@@ -1,8 +1,9 @@
-class GamesController < ApplicationController
+class Api::SchoolsController < ApplicationController
   def bracket
     @schools = School.all
   end
 
-  def results
+  def show
+    @school = School.find(params[:id])
   end
 end
