@@ -1,0 +1,14 @@
+.login {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  form {
+    padding: 40px;
+    border-radius: 5px;
+    margin: 10px;
+    background: $bball-court;
+    border: 1px solid $bball-orange;
+  }
+}

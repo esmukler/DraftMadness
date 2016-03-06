@@ -11,6 +11,5 @@ class School < ActiveRecord::Base
   end
 
   def total_points
-
   end
 end
