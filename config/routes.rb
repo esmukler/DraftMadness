@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root to: "homepages#root"
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  devise_scope :user do
+    get '/logout', to: 'devise/sessions#destroy'
+  end
 
   namespace :api, defaults: { format: :json } do
     resources :owners

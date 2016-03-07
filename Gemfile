@@ -21,6 +21,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise', '~> 3.4.0'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
 
 group :production do
   gem 'rails_12factor'
