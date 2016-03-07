@@ -1,0 +1,15 @@
+<div class="header row">
+  <div class="text-center col-md-3">
+    <%= image_tag 'bball-icon', class: 'bball-icon' %>
+  </div>
+
+  <div class="text-center title col-md-6">
+    Draft Madness 2016
+  </div>
+
+  <div class="login-btn col-md-3 text-center">
+    <% if user_signed_in? %>
+      <%= link_to 'Logout', logout_path, class: 'btn btn-default' %>
+    <% end %>
+  </div>
+</div>

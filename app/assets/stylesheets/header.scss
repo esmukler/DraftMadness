@@ -1,0 +1,15 @@
+.header {
+  background: $bball-court;
+  max-height: 100px;
+
+  .bball-icon {
+    max-height: 50px;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+  .login-btn {
+    padding: 5px
+  }
+}

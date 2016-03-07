@@ -25,9 +25,17 @@
    background: transparent;
 }
 
+.group:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
 $bball-court: #ffd480;
 $bball-orange: #e68a00;
+$error-red: #ff9999;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "login";
+@import "header";
