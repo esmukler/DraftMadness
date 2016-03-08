@@ -10,9 +10,22 @@ class User < ActiveRecord::Base
   has_many :leagues, through: :owners
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
+    existing_user = self.find_by(email: auth.info.email)
+
+    omniauth_params = {
+      provider: auth.provider,
+      uid: auth.uid
+    }
+
+    if existing_user
+      existing_user.update(omniauth_params)
+    else
+      omniauth_params.merge!({
+        email = auth.info.email
+        password = Devise.friendly_token[0, 20]
+      })
+
+      create(omniauth_params)
     end
   end
 
