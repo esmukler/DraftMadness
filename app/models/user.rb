@@ -21,8 +21,8 @@ class User < ActiveRecord::Base
       existing_user.update(omniauth_params)
     else
       omniauth_params.merge!({
-        email = auth.info.email
-        password = Devise.friendly_token[0, 20]
+        email: auth.info.email,
+        password: Devise.friendly_token[0, 20]
       })
 
       create(omniauth_params)
