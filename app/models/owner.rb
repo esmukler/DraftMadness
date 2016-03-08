@@ -7,5 +7,16 @@ class Owner < ActiveRecord::Base
   has_many :schools, through: :owner_schools
 
   def total_points
+    owner_schools.map(&:total_points).inject(&:+)
+  end
+
+  def current_ranking
+    league.owners.sort do |a,b|
+      b.total_points - a.total_points
+    end.each_with_index do |owner, idx|
+      next unless owner.id == id
+      return idx + 1
+    end
+    nil
   end
 end

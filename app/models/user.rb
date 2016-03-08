@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates :email, :password, presence: true
 
   has_many :owners
+  has_many :leagues, through: :owners
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  root to: "homepages#root"
+  authenticated :user do
+    root :to => "homepages#root"
+  end
+  unauthenticated :user do
+    devise_scope :user do
+      get "/" => "devise/sessions#new"
+    end
+  end
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
@@ -8,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: { format: :json } do
+    resources :users
     resources :owners
 
     resources :schools do

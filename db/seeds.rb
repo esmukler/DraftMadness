@@ -42,6 +42,10 @@ rows.each do |row|
   end
 end
 
+# Create Games
+  # Assign schools to Games
+  # Connect games to future games
+
 # Create test League
 
 league = League.create!(name: "Playa's Club", description: 'Where the Playas Play', password: 'thebiggityO')
