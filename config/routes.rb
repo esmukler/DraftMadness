@@ -14,8 +14,6 @@ Rails.application.routes.draw do
     get '/logout', to: 'devise/sessions#destroy'
   end
 
-  resources :owners
-
   resources :schools do
     collection do
       get 'bracket'
@@ -24,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :leagues do
     get 'standings'
+    resources :owners
   end
 
   resources :owner_schools, only: %i(create destroy)

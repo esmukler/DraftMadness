@@ -13,7 +13,7 @@
     <% @user.owners.each do |owner| %>
       <tr>
         <td><%= link_to owner.league.name, league_standings_path(owner.league) %></td>
-        <td><%= link_to owner.team_name, owner_path(owner) %></td>
+        <td><%= link_to owner.team_name, league_owner_path(league_id: owner.league.id, id: owner.id) %></td>
         <td><%= owner.total_points %></td>
         <td><%= owner.current_ranking.presence || '-' %></td>
       </tr>

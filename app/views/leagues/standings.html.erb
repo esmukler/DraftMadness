@@ -10,25 +10,42 @@
   <% end %>
 </div>
 
+<h3>Leaderboard</h3>
+<table class="table table-responsive table-hover table-condensed">
+  <tr class="active">
+    <th>Ranking</th>
+    <th>Has Paid?</th>
+    <th>Owner Name</th>
+    <th>2nd Round</th>
+    <th>3rd Round</th>
+    <th>Sweet 16</th>
+    <th>Elite 8</th>
+    <th>Final 4</th>
+    <th title="National Championship">Title Game</th>
+    <th title="Points Possible Remaining">PPR*</th>
+    <th>Max</th>
+    <th>TOTAL</th>
+  </tr>
+  <% @league.owners.sort_by(&:current_ranking).each do |owner| %>
+    <tr>
+      <th><%= owner.current_ranking %></th>
+      <th><%= owner.has_paid %></th>
+      <th><%= link_to owner.team_name, league_owner_path(@league, owner) %></th>
+      <% 6.times do |round| %>
+        <th><%= owner.score_for_round(round) %></th>
+      <% end %>
+      <th><%= owner.ppr %></th>
+      <th><%= owner.max %></th>
+      <th><%= owner.total_points %></th>
+      </tr>
+  <% end %>
+</table>
+<em class="pull-right">*Points Possible Remaining</em>
+
+
+<h3>TODO:</h3>
+
 <ul>
   <li>All the owners in the league sorted by total points.</li>
   <li><%= image_tag 'standings-mock', class: 'mock-image' %></li>
 </ul>
-
-<h3>Leaderboard</h3>
-<table class="table table-striped table-responsive table-condensed">
-  <tr>
-    <th>Ranking</th>
-    <th>Has Paid?</th>
-    <th>Owner Name</th>
-    <th>Second Round</th>
-    <th>Third Round</th>
-    <th>Sweet Sixteen</th>
-    <th>Elite Eight</th>
-    <th>Final Four</th>
-    <th>National Championship</th>
-    <th>PPR*</th>
-    <th>Max</th>
-    <th>TOTAL</th>
-  </tr>
-</table>

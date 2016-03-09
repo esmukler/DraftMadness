@@ -6,7 +6,6 @@ class CreateOwners < ActiveRecord::Migration
       t.string  :team_name, null: false
       t.text    :motto
       t.integer :draft_pick
-      t.boolean :has_paid, default: false, null: false
 
       t.timestamps
     end

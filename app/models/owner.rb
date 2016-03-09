@@ -7,7 +7,7 @@ class Owner < ActiveRecord::Base
   has_many :schools, through: :owner_schools
 
   def total_points
-    owner_schools.map(&:total_points).inject(&:+)
+    schools.map(&:total_points).sum
   end
 
   def current_ranking
@@ -20,5 +20,23 @@ class Owner < ActiveRecord::Base
       return idx + 1
     end
     nil
+  end
+
+  def score_for_round(round)
+    schools.map do |school|
+      school.score_for_round(round)
+    end.sum
+  end
+
+  def ppr
+    schools.map(&:ppr).sum
+  end
+
+  def max
+    schools.map(&:ppr).sum
+  end
+
+  def pick_for(school)
+    owner_schools.find_by(school: school).draft_pick
   end
 end

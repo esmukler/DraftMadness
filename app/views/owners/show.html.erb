@@ -1,0 +1,40 @@
+<h2><%= @owner.team_name %></h2>
+<h3><%= @owner.motto %></h3>
+
+<h3><%= @owner.team_name %>'s Points</h3>
+<table class="table table-responsive table-hover table-condensed">
+  <tr class="active">
+    <th>Pick #</th>
+    <th>School</th>
+    <th>Seed</th>
+    <th>Region</th>
+    <th>2nd Round</th>
+    <th>3rd Round</th>
+    <th>Sweet 16</th>
+    <th>Elite 8</th>
+    <th>Final 4</th>
+    <th title="National Championship">Title Game</th>
+    <th title="Points Possible Remaining">PPR*</th>
+    <th>Max</th>
+    <th>TOTAL</th>
+  </tr>
+  <% @schools.each do |school| %>
+    <tr>
+      <th><%= @owner.pick_for(school) %></th>
+      <th><%= link_to school.full_name, school_path(school) %></th>
+      <th><%= school.seed_number %></th>
+      <th><%= school.region %></th>
+      <% 6.times do |round| %>
+        <th><%= school.score_for_round(round) %></th>
+      <% end %>
+      <th><%= school.ppr %></th>
+      <th><%= school.max %></th>
+      <th><%= school.total_points %></th>
+    </tr>
+  <% end %>
+</table>
+<em class="pull-right">*Points Possible Remaining</em>
+
+
+
+<%= image_tag 'owner-schools-mock', class: 'mock-image' %>
