@@ -1,0 +1,13 @@
+<h2><%= league.name %></h2>
+<h3><%= league.description %></h3>
+
+<div class="full-reminder">
+  <% if league.full? %>
+    Congrats! Your league is full and ready to rumble.
+  <% else %>
+    Your league is still <%= 8 - league.owners.count %> owners away from being ready to participate.
+    <strong>Reminder:</strong> You have until 11:59 PT Wednesday March 16 to have 8 owners.
+  <% end %>
+</div>
+
+</br>

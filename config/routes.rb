@@ -14,14 +14,14 @@ Rails.application.routes.draw do
     get '/logout', to: 'devise/sessions#destroy'
   end
 
-  resources :schools do
-    collection do
-      get 'bracket'
-    end
-  end
+  resources :users, only: :show
+
+  resources :schools, only: :show
 
   resources :leagues do
-    get 'standings'
+    get 'leaderboard'
+    get 'bracket'
+    get 'draft_room'
     resources :owners
   end
 
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     end
 
     resources :leagues do
-      get 'standings'
+      get 'leaderboard'
     end
 
     resources :owner_schools, only: %i(create destroy)

@@ -7,9 +7,17 @@
     float: left;
   }
 
-  .title {
+  div.title {
     font-size: 40px;
     overflow: hidden;
+
+    a {
+      color: inherit;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 
   .login-btn {

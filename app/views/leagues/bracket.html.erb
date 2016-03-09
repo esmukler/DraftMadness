@@ -1,0 +1,18 @@
+<%= render 'header', league: @league %>
+
+<div class="row">
+
+  <%= render 'centered_nav', league: @league %>
+
+  <% @schools.each do |school| %>
+    <div class="col-md-2"><%= link_to school.name, school_path(school) %></div>
+  <% end %>
+</div>
+
+
+<div>TODO:</div>
+<ul>
+  <li>Schedule of games</li>
+  <li>Results of games</li>
+  <li>Bonus: choose which owner you would like to reflect personalized results for</li>
+</ul>

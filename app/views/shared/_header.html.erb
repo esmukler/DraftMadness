@@ -13,7 +13,7 @@
     </div>
 
     <div class="text-center title">
-      Draft Madness 2016
+      <%= link_to_if user_signed_in?, 'Draft Madness 2016', user_path(current_user) %>
     </div>
   </div>
 </div>

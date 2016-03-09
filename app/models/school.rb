@@ -23,6 +23,7 @@ class School < ActiveRecord::Base
   end
 
   def started?
+    return unless games.any?
     first_start_time = games.order(:start_time).first.start_time
     first_start_time && first_start_time < Time.zone.now
   end

@@ -4,7 +4,7 @@ class Api::LeaguesController < ApplicationController
     # assign current_user as commissioner?
   end
 
-  def standings
+  def leaderboard
     @league = League.find(params[:league_id])
     @owners = @league.owners.sort_by { |o| o.total_points }
   end
