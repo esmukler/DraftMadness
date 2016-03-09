@@ -4,14 +4,16 @@
       <%= image_tag 'bball-icon', class: 'bball-icon' %>
     </div>
 
-    <div class="text-center title">
-      Draft Madness 2016
-    </div>
-
     <div class="login-btn text-center">
       <% if user_signed_in? %>
         <%= link_to 'Logout', logout_path, class: 'btn btn-default' %>
+      <% else %>
+        <%= link_to 'Hello', '#', class: 'btn btn-default' %>
       <% end %>
+    </div>
+
+    <div class="text-center title">
+      Draft Madness 2016
     </div>
   </div>
 </div>

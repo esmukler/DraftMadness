@@ -12,4 +12,9 @@ class School < ActiveRecord::Base
 
   def total_points
   end
+
+  def started?
+    first_start_time = games.order(:start_time).first.start_time
+    first_start_time && first_start_time < Time.zone.now
+  end
 end

@@ -1,0 +1,33 @@
+<h3><%= @user.email %></h3>
+
+<% if @user.leagues.any? %>
+  <h3>Your Leagues</h3>
+
+  <table class="table table table-hover">
+    <tr>
+      <th>League Name</th>
+      <th>Owner Name</th>
+      <th>Current Points</th>
+      <th>Current Ranking</th>
+    </tr>
+    <% @user.owners.each do |owner| %>
+      <tr>
+        <td><%= link_to owner.league.name, league_standings_path(owner.league) %></td>
+        <td><%= link_to owner.team_name, owner_path(owner) %></td>
+        <td><%= owner.total_points %></td>
+        <td><%= owner.current_ranking.presence || '-' %></td>
+      </tr>
+    <% end %>
+  </table>
+
+<% else %>
+  <p>You have not joined any leagues yet! Choose one of the options below to get started:</p>
+
+  <%= link_to 'Create a League', new_league_path, class: 'btn btn-primary' %>
+  <%= link_to 'Join a League', new_league_path, class: 'btn btn-primary' %>
+
+<% end %>
+
+<h3>TODO:</h3>
+<%# @user.current_games %>
+<p>List of the most recent/current/upcoming tournament games.</p>

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :owners
   has_many :leagues, through: :owners
+  has_many :owned_schools, through: :owners, source: :schools
 
   def self.from_omniauth(auth)
     user = self.find_by(email: auth.info.email)
@@ -41,6 +42,12 @@ class User < ActiveRecord::Base
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         user.email = data["email"] if user.email.blank?
       end
+    end
+  end
+
+  def current_games
+    Game.current_games.select do |game|
+      school_ids.any? { |x| game.school_ids.include?(x) }
     end
   end
 end

@@ -9,7 +9,16 @@ class Game < ActiveRecord::Base
     'Elite Eight', 'Final Four', 'Championship'
   ]
 
+  def self.current_games
+    where(is_over: false).
+    where('start_time < ?', Time.zone.now)
+  end
+
   def round_name
     ROUND_NAMES[round]
+  end
+
+  def school_ids
+    [school1.id, school2.id]
   end
 end

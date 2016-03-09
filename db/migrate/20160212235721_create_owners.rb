@@ -4,8 +4,9 @@ class CreateOwners < ActiveRecord::Migration
       t.integer :user_id,   null: false
       t.integer :league_id
       t.string  :team_name, null: false
-      t.text  :motto
+      t.text    :motto
       t.integer :draft_pick
+      t.boolean :has_paid, default: false, null: false
 
       t.timestamps
     end

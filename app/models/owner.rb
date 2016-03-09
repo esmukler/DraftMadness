@@ -11,6 +11,8 @@ class Owner < ActiveRecord::Base
   end
 
   def current_ranking
+    return nil unless schools.map(&:started?).any?
+
     league.owners.sort do |a,b|
       b.total_points - a.total_points
     end.each_with_index do |owner, idx|
