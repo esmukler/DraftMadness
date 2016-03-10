@@ -1,10 +1,11 @@
 class Owner < ActiveRecord::Base
-  validates :team_name, :user, presence: true
-
   belongs_to :user
   belongs_to :league
   has_many :owner_schools
   has_many :schools, through: :owner_schools
+
+  validates :team_name, :user, presence: true
+  validates :user, uniqueness: { scope: :league, message: 'you may only have one owner per league' }
 
   def total_points
     schools.map(&:total_points).sum

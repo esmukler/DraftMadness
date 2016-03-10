@@ -50,4 +50,8 @@ class User < ActiveRecord::Base
       school_ids.any? { |x| game.school_ids.include?(x) }
     end
   end
+
+  def owner_for_league(league)
+    owners.find_by(league: league)
+  end
 end

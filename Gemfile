@@ -23,6 +23,9 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 
+gem 'react-rails', '~> 1.6.0'
+gem 'browserify-rails'
+
 group :production do
   gem 'rails_12factor'
 end
