@@ -1,0 +1,15 @@
+<h2>Name Your Squad</h2>
+
+<%= simple_form_for :owner, url: league_owners_url, html: { class: 'form-vertical' } do |f| %>
+
+  <%= f.input :team_name, label: 'Name', html: { maxlength: 255 } %>
+  </br>
+
+  <%= f.input :motto, as: :text, label: 'Motto', input_html: { cols: 50 },
+    required: false, placeholder: "Win or go home." %>
+  </br>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <%= f.button :submit, 'Get to the Bracket!', class: 'btn btn-primary' %>
+<% end %>

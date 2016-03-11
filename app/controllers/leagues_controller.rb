@@ -10,7 +10,7 @@ class LeaguesController < ApplicationController
 
     if @league.save
       flash[:notice] = 'League successfully created!'
-      render :leaderboard
+      redirect_to new_league_owner_path(league_id: @league.id)
     else
       flash[:errors] = @league.errors.full_messages.join(', ')
       render :new
@@ -29,10 +29,6 @@ class LeaguesController < ApplicationController
   end
 
   private
-
-  def get_league
-    @league = League.find(params[:league_id])
-  end
 
   def draft_room_data
     @user_data = {

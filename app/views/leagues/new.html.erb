@@ -9,15 +9,20 @@
     required: false, placeholder: "There's no crying in basketball." %>
   </br>
 
-  <%= f.input :password, as: :string, input_html: { 'aria-describedly' => 'helpBlock'} %>
+  <%= f.input :password, as: :string, required: false,
+    input_html: { 'aria-describedly' => 'helpBlock'} %>
+
   <span class="help-block">
     Create a password to give out to other users, so that only they can join your league.
   </span>
   </br>
 
+  <%= f.hidden_field :commissioner_id, value: current_user.id %>
+
   <%= f.button :submit, 'Create League!', class: 'btn btn-primary' %>
 <% end %>
 
-<!-- <span class="help-block">
+<span class="help-block">
+  <strong>Hail to the chief!</strong>
   Since you are creating this League, you will be deemed its commissioner.
-</div> -->
+</span>

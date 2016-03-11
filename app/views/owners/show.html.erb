@@ -34,7 +34,15 @@
   <% end %>
 </table>
 <em class="pull-right">*Points Possible Remaining</em>
+<% if @schools.empty? %>
+  <p>You haven't selected any schools yet.</p>
+  <p>
+    Go to the
+    <%= link_to 'Draft Room', league_draft_room_path(@league) %>
+    to add some schools to your squad!
+  </p>
+<% end %>
 
-
-
+</br>
+</br>
 <%= image_tag 'owner-schools-mock', class: 'mock-image' %>

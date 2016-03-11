@@ -4,4 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   before_action :authenticate_user!
+
+  def get_league
+    @league = League.find(params[:league_id])
+  end
 end

@@ -4,7 +4,7 @@ class Owner < ActiveRecord::Base
   has_many :owner_schools
   has_many :schools, through: :owner_schools
 
-  validates :team_name, :user, presence: true
+  validates :team_name, :user, :league, presence: true
   validates :user, uniqueness: { scope: :league, message: 'you may only have one owner per league' }
 
   def total_points
@@ -39,5 +39,9 @@ class Owner < ActiveRecord::Base
 
   def pick_for(school)
     owner_schools.find_by(school: school).draft_pick
+  end
+
+  def commissioner?
+    league.commissioner == user
   end
 end
