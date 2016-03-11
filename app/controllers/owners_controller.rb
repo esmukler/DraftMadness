@@ -1,5 +1,6 @@
 class OwnersController < ApplicationController
   before_action :get_league
+  before_action :check_if_in_league, only: :show
 
   def new
     @owner = @league.owners.new

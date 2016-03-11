@@ -1,5 +1,6 @@
 class LeaguesController < ApplicationController
   before_action :get_league, only: %i(leaderboard bracket draft_room)
+  before_action :check_if_in_league, only: %i(leaderboard bracket draft_room)
 
   def new
     @league = League.new

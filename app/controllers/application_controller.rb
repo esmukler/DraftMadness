@@ -8,4 +8,11 @@ class ApplicationController < ActionController::Base
   def get_league
     @league = League.find(params[:league_id])
   end
+
+  def check_if_in_league
+    return if current_user.leagues.include?(@league)
+
+    flash[:error] = "You're out of your league!"
+    redirect_to user_path(current_user)
+  end
 end
