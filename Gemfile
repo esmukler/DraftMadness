@@ -26,6 +26,8 @@ gem 'omniauth-facebook'
 gem 'react-rails', '~> 1.6.0'
 gem 'browserify-rails'
 
+gem 'simple_form'
+
 group :production do
   gem 'rails_12factor'
 end

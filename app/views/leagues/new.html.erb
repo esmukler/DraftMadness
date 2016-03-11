@@ -1,0 +1,23 @@
+<h2>Create a New League</h2>
+
+<%= simple_form_for :league, url: leagues_url, html: { class: 'form-vertical' } do |f| %>
+
+  <%= f.input :name, label: 'League Name', html: { maxlength: 255 } %>
+  </br>
+
+  <%= f.input :description, as: :text, label: 'Description', input_html: { cols: 50 },
+    required: false, placeholder: "There's no crying in basketball." %>
+  </br>
+
+  <%= f.input :password, as: :string, input_html: { 'aria-describedly' => 'helpBlock'} %>
+  <span class="help-block">
+    Create a password to give out to other users, so that only they can join your league.
+  </span>
+  </br>
+
+  <%= f.button :submit, 'Create League!', class: 'btn btn-primary' %>
+<% end %>
+
+<!-- <span class="help-block">
+  Since you are creating this League, you will be deemed its commissioner.
+</div> -->

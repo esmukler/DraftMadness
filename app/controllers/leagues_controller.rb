@@ -1,5 +1,21 @@
 class LeaguesController < ApplicationController
-  before_action :get_league
+  before_action :get_league, only: %i(leaderboard bracket draft_room)
+
+  def new
+    @league = League.new
+  end
+
+  def create
+    @league = League.new(league_params)
+
+    if @league.save
+      flash[:notice] = 'League successfully created!'
+      render :leaderboard
+    else
+      flash[:errors] = @league.errors.full_messages.join(', ')
+      render :new
+    end
+  end
 
   def leaderboard
   end
@@ -24,5 +40,9 @@ class LeaguesController < ApplicationController
       current_user_id: current_user.id,
       current_owner_id: current_user.owner_for_league(@league).try(:id)
     }
+  end
+
+  def league_params
+    params.require(:league).permit(:name, :description, :commissioner_id, :password)
   end
 end
