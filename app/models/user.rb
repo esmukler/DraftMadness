@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable,
-         :rememberable, :validatable
+         :rememberable, :validatable, :invitable
 
-  devise :omniauthable, omniauth_providers: [:facebook]
+  devise :invitable, :omniauthable, omniauth_providers: [:facebook]
 
   validates :email, :password, presence: true
 

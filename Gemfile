@@ -19,6 +19,8 @@ gem 'jbuilder', '~> 2.0'
 
 # authentication
 gem 'devise', '~> 3.4.0'
+gem 'devise_invitable', '~> 1.5.2'
+
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'

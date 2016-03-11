@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     get 'leaderboard'
     get 'bracket'
     get 'draft_room'
+    get 'new_invite'
+    post 'invite'
     resources :owners
   end
 
