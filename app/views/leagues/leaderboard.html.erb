@@ -1,12 +1,10 @@
 <%= render 'header', league: @league %>
 
 <div class="row">
-  <%= render 'centered_nav', league: @league %>
-
   <table class="table table-responsive table-hover table-condensed">
     <tr class="active">
       <th>Ranking</th>
-      <th>Has Paid?</th>
+      <!-- <th>Has Paid?</th> -->
       <th>Owner Name</th>
       <th>2nd Round</th>
       <th>3rd Round</th>
@@ -21,7 +19,7 @@
     <% @league.owners.sort_by(&:current_ranking).each do |owner| %>
       <tr>
         <th><%= owner.current_ranking %></th>
-        <th><%= owner.has_paid %></th>
+        <!-- <th><%= owner.has_paid %></th> -->
         <th><%= link_to owner.team_name, league_owner_path(@league, owner) %></th>
         <% 6.times do |round| %>
           <th><%= owner.score_for_round(round) %></th>

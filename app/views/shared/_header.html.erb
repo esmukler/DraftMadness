@@ -1,29 +1,30 @@
-<div class="header">
-  <div class="container">
-    <div class="text-center">
-      <%= image_tag 'bball-icon', class: 'bball-icon' %>
+<nav id="dm-header" class="navbar navbar-default navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="navbar-brand">
+        <%= image_tag 'bball-icon', class: 'img-responsive bball-icon' %>
+      </div>
     </div>
 
-    <div class="login-btn text-center">
-      <% if user_signed_in? %>
-        <%= link_to 'Logout', logout_path, class: 'btn btn-default' %>
-      <% else %>
-        <%= link_to 'Hello', '#', class: 'btn btn-default' %>
-      <% end %>
-    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="title active">
+          <% title_path = user_signed_in? ? user_path(current_user) : root_path %>
+          <%= link_to 'Draft Madness 2016', title_path %>
+        </li>
+        <li>
+          <%= link_to 'Rules', '#' %>
+        </li>
+        <li>
+          <%= link_to 'About', '#' %>
+        </li>
+      </ul>
 
-    <div class="text-center title">
       <% if user_signed_in? %>
-        <%= link_to 'Draft Madness 2016', user_path(current_user) %>
-      <% else %>
-        Draft Madness 2016
+        <div class="logout">
+          <%= link_to 'Log Out', logout_path, class: 'btn' %>
+        </div>
       <% end %>
     </div>
   </div>
-</div>
-
-<%# TODO: https://getbootstrap.com/examples/navbar-static-top/ %>
-<%# Links:
-  email => user_show
-  about page
-  %>
+</nav>

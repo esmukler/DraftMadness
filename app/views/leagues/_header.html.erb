@@ -1,5 +1,5 @@
 <h2><%= league.name %></h2>
-<h3><%= league.description %></h3>
+<h4><%= league.description %></h4>
 
 <div class="full-reminder">
   <% if league.full? %>
@@ -19,4 +19,5 @@
 </div>
 
 </br>
-<!-- Incoroprate this into the navbar and include user/show as a link as well -->
+
+<%= render 'leagues/league_nav', league: league %>

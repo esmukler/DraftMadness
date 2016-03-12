@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def owner_for_league(league)
+  def owner_for(league)
     owners.find_by(league: league)
   end
 end

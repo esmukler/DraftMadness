@@ -31,6 +31,11 @@
   clear: both;
 }
 
+h4 {
+  font-size: 18px;
+  font-weight: normal;
+  font-style: italic;
+}
 main.container {
   position: relative;
 }
@@ -44,7 +49,8 @@ main.container {
   max-height: 200px;
 }
 $bball-court: #ffd480;
-$bball-orange: #e68a00;
+$bball-dark-court: #ffbb33;
+$bball-orange: #e65c00;
 $error-red: #ff9999;
 
 @import "bootstrap-sprockets";

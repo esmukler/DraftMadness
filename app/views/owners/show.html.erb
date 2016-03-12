@@ -1,7 +1,9 @@
-<h2><%= @owner.team_name %></h2>
-<h3><%= @owner.motto %></h3>
+<%= render 'leagues/header', league: @league %>
 
-<h3><%= @owner.team_name %>'s Points</h3>
+<h2><%= @owner.team_name %></h2>
+<h4><%= @owner.motto %></h4>
+</br>
+
 <table class="table table-responsive table-hover table-condensed">
   <tr class="active">
     <th>Pick #</th>

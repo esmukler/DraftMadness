@@ -1,10 +1,16 @@
-<ul id="centered-nav" class="geometric-font nav-tabs nav nav-justified">
+<ul id="centered-nav" class="nav-tabs nav nav-justified">
   <li class="<%= action_name == 'leaderboard' ? 'active' : '' %>">
     <%= link_to 'Leaderboard', league_leaderboard_path(league) %>
   </li>
+
+  <li class="<%= my_owner_page? ? 'active' : '' %>">
+    <%= link_to 'My Squad', league_owner_path(league, current_user.owner_for(league)) %>
+  </li>
+
   <li class="<%= action_name == 'bracket' ? 'active' : '' %>">
     <%= link_to 'Bracket', league_bracket_path(league) %>
   </li>
+
   <li class="<%= action_name == 'draft_room' ? 'active' : '' %>">
     <%= link_to 'Draft Room', league_draft_room_path(league) %>
   </li>
