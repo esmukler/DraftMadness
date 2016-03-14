@@ -1,17 +1,19 @@
 class Api::OwnerSchoolsController < ApplicationController
   def create
-    @owner_school = OwnerSchool.create(owner_schoool_params)
-  end
+    @owner = Owner.find(os_params[:owner_id].to_i)
 
-  def destroy
-    owner_school = OwnerSchool.find_by(owner_schoool_params)
+    @owner_school = OwnerSchool.create!(os_params)
 
-    owner_school.destroy
+    @owner.league.current_draft_pick += 1
+    @owner.league.save
+
+    render 'show'
   end
 
   private
 
-  def owner_schoool_params
-    params.require(:owner_school).permit(:owner_id, :school_id)
+  def os_params
+    hash = params.require(:owner_school).permit(:owner_id, :school_id, :draft_pick, :league_id)
+    hash.update(hash) { |k,v| v.to_i }
   end
 end

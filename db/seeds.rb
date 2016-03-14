@@ -1,50 +1,62 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
+require 'csv'
 
-# Create Seeds
-%w(Midwest West South East).each do |region|
-  (1..16).to_a.each do |seed|
-    Seed.create!(
-      seed_number: seed,
-      region: region,
-      play_in_game: false
-    )
-  end
-end
+# Create schools and seeds from CSV file
+filename = 'db/2016_teams.csv'
 
+CSV.foreach(filename, headers: true) do |row|
+  seed = row['seed'].to_i
+  region = row['region']
+  name = row['name']
+  mascot = row['mascot']
+  play_in_game = row['play_in_game'].present?
 
-# Create 2015 schools from text file
-output = IO.read('db/2015_teams.txt')
-rows = output.split("\n")
+  seed = Seed.create!(
+    seed_number: seed,
+    region: region,
+    play_in_game: play_in_game
+  )
 
-rows.each do |row|
-  cells = row.split("\t ")
-  region = cells.last
-  seed_number = cells[-2].to_i
-  seed = Seed.find_by(region: region, seed_number: seed_number)
-
-  school_name =
-    if cells.first.include?('Kentucky')
-      'Kentucky'
-    else
-      school_name = cells[1]
-    end
-
-  # play in game school
-  if seed.school
-    seed.update(play_in_game: true)
-    other_school = seed.school
-    combined_name = "#{school_name}/#{other_school.name}"
-    other_school.update(name: combined_name)
-  else
-    School.create!(name: school_name, seed_id: seed.id)
-  end
+  school = School.create!(
+    name: name,
+    mascot: mascot,
+    seed: seed
+  )
 end
 
 # Create Games
-  # Assign schools to Games
-  # Connect games to future games
+Seed.where("seed_number <= ?", 8).each do |seed|
+  school1 = seed.school
+  other_school_seed = Seed.find_by(
+    seed_number: (17 - seed.seed_number),
+    region: seed.region
+  )
+  school2 = other_school_seed.school
+
+  Game.create!(
+    school1_id: school1.id,
+    school2_id: school2.id,
+    round: 0
+  )
+end
+
+# Create other games
+
+# 4.times do |index|
+#   # games = Game.where(round: index)
+#
+#   games.count.times do |idx|
+#     next unless idx % 2 == 0
+#     game = games[idx]
+#
+#     next_round_game = Game.create!(
+#       round: (game.round + 1)
+#     )
+#     game.update(next_game_id: next_round_game.id)
+#
+#     other_game = games[idx + 1]
+#     other_game.update(next_game_id: next_round_game.id)
+#   end
+# end
 
 # Create test League
 
@@ -54,7 +66,7 @@ league = League.create!(name: "Playa's Club", description: 'Where the Playas Pla
   user = User.create!(email: "test_#{idx}@example.com", password: 'secret_password')
   owner = user.owners.create!(team_name: "gobruins_#{idx}", motto: "I'm the No. #{idx} best player", league: league)
 
-  league.update(commissioner: owner) if idx == 1
+  league.update(commissioner: user) if idx == 1
 end
 
 puts "Seeds file complete"

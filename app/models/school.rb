@@ -28,7 +28,7 @@ class School < ActiveRecord::Base
       won?(game)
     end.map do |game|
       seed.points_for_winning(game.round)
-    end.sum
+    end.sum.round(2)
   end
 
   def won?(game)
@@ -49,7 +49,7 @@ class School < ActiveRecord::Base
 
     remaining_rounds.map do |round|
       seed.points_for_winning(round)
-    end.sum
+    end.sum.round(2)
   end
 
   def max
@@ -69,5 +69,13 @@ class School < ActiveRecord::Base
 
   def region
     seed.region
+  end
+
+  def owned_by?(owner)
+    OwnerSchool.where(school: self, owner: owner).any?
+  end
+
+  def selected_in?(league)
+    OwnerSchool.where(school: self, league: league).any?
   end
 end

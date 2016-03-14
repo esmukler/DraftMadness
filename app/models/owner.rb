@@ -7,8 +7,10 @@ class Owner < ActiveRecord::Base
   validates :team_name, :user, :league, presence: true
   validates :user, uniqueness: { scope: :league, message: 'you may only have one owner per league' }
 
+  after_create :set_draft_order
+
   def total_points
-    schools.map(&:total_points).sum
+    schools.map(&:total_points).sum.round(2)
   end
 
   def current_ranking
@@ -26,15 +28,15 @@ class Owner < ActiveRecord::Base
   def score_for_round(round)
     schools.map do |school|
       school.score_for_round(round)
-    end.sum
+    end.sum.round(2)
   end
 
   def ppr
-    schools.map(&:ppr).sum
+    schools.map(&:ppr).sum.round(2)
   end
 
   def max
-    schools.map(&:ppr).sum
+    schools.map(&:ppr).sum.round(2)
   end
 
   def pick_for(school)
@@ -43,5 +45,22 @@ class Owner < ActiveRecord::Base
 
   def commissioner?
     league.commissioner == user
+  end
+
+  def set_draft_order
+    return unless last_league_member?
+
+    draft_picks = (1..8).to_a.shuffle
+    league.owners.each_with_index do |owner, idx|
+      owner.update(draft_pick: draft_picks[idx])
+    end
+  end
+
+  def last_league_member?
+    league.owners.count == 8
+  end
+
+  def current_turn?
+    league.turn_for?(self)
   end
 end

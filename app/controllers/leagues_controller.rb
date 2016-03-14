@@ -59,10 +59,13 @@ class LeaguesController < ApplicationController
   end
 
   def draft_room_data
+    @current_owner = current_user.owner_for(@league)
     @user_data = {
       league_id: @league.id,
       current_user_id: current_user.id,
-      current_owner_id: current_user.owner_for(@league).try(:id)
+      current_owner_id: @current_owner.try(:id),
+      current_draft_pick: @league.current_draft_pick,
+      current_owner_turn: @league.turn_for?(@current_owner)
     }
   end
 

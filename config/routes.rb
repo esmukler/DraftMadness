@@ -31,7 +31,6 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :users
-    resources :owners
 
     resources :schools do
       collection do
@@ -41,6 +40,7 @@ Rails.application.routes.draw do
 
     resources :leagues do
       get 'leaderboard'
+      resources :owners
     end
 
     resources :owner_schools, only: %i(create destroy)

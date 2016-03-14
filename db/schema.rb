@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160311055820) do
+ActiveRecord::Schema.define(version: 20160314033427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20160311055820) do
     t.integer  "school1_id"
     t.integer  "school2_id"
     t.integer  "round",                           null: false
-    t.datetime "start_time",                      null: false
+    t.datetime "start_time"
     t.boolean  "is_over",         default: false, null: false
     t.integer  "next_game_id"
     t.integer  "winning_team_id"
@@ -30,12 +30,13 @@ ActiveRecord::Schema.define(version: 20160311055820) do
   end
 
   create_table "leagues", force: :cascade do |t|
-    t.string   "name",            null: false
+    t.string   "name",                           null: false
     t.text     "description"
     t.integer  "commissioner_id"
     t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "current_draft_pick", default: 1, null: false
   end
 
   create_table "owner_schools", force: :cascade do |t|

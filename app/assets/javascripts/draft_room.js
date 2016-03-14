@@ -10,7 +10,9 @@
       var props = {
         leagueID: dm.userData.league_id,
         currentUserID: dm.userData.current_user_id,
-        currentOwnerID: dm.userData.current_owner_id
+        currentOwnerID: dm.userData.current_owner_id,
+        currentDraftPick: dm.userData.current_draft_pick,
+        currentOwnerTurn: dm.userData.current_owner_turn
       }
 
       ReactDOM.render(React.createElement(DraftRoom, props), $(el)[0]);

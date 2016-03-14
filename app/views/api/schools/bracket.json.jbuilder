@@ -1,2 +1,1 @@
-# TODO: render array(s) of school partials
-json.schools @schools
+json.array! @schools, partial: 'api/schools/school' , as: :school

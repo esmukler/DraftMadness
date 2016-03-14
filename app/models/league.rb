@@ -9,4 +9,18 @@ class League < ActiveRecord::Base
   def full?
     owners.count == 8
   end
+
+  def turn_for?(owner)
+    return false unless owner
+
+    owner = owner.draft_pick
+    league = current_draft_pick
+
+    (0...4).to_a.map do |cycle|
+      start = cycle * 16
+
+      start + owner == league ||
+      (start + 17) - owner == league
+    end.any?
+  end
 end

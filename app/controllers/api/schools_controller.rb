@@ -1,9 +1,10 @@
 class Api::SchoolsController < ApplicationController
   def bracket
-    @schools = School.all
-  end
+    owner_id = params[:current_owner_id].to_i
+    @owner = Owner.find(owner_id)
 
-  def show
-    @school = School.find(params[:id])
+    @league = @owner.league
+
+    @schools = School.all.sort_by(&:seed_number)
   end
 end

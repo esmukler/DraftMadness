@@ -1,0 +1,42 @@
+.draft-room {
+  .message {
+    margin: 10px;
+  }
+
+  .section-header {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .owners {
+    margin-bottom: 20px;
+
+    .owner {
+      padding: 10px 0;
+
+      &.me {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .schools {
+    .regions {
+      border: 2px solid $bball-dark-court;
+      border-radius: 5px;
+
+      .region {
+        padding: 10px;
+        background: $bball-court;
+      }
+    }
+    .school {
+      padding: 10px 0;
+    }
+    .school.available:hover {
+      background: $bball-court;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+}

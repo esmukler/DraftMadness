@@ -1,1 +1,0 @@
-json.school @school
