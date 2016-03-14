@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   devise :invitable, :omniauthable, omniauth_providers: [:facebook]
 
-  validates :email, :password, presence: true
+  validates :email, presence: true
 
   has_many :owners
   has_many :leagues, through: :owners
