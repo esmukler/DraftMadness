@@ -12,7 +12,7 @@ var School = React.createClass({
         classNames += props.is_current_user ? ' me' : '';
         classNames += props.current_turn ? ' bg-success' : '';
 
-        var text = `${this.props.owner.name} (${this.props.owner.draft_pick})`;
+        var text = this.props.owner.name + ' (' + this.props.owner.draft_pick + ')';
 
         return (
             <div className={classNames}>

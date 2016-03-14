@@ -28,7 +28,7 @@ var DraftRoom = React.createClass({
     },
 
     fetchOwners: function() {
-      var url = `/api/leagues/${this.props.leagueID}/owners`;
+      var url = '/api/leagues/' + this.props.leagueID + '/owners';
 
       $.ajax(url, {
           type: 'GET',

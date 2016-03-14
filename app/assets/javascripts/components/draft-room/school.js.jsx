@@ -6,7 +6,7 @@ var School = React.createClass({
                 return;
         }
 
-        var confirmText = `Are you sure you want to draft ${this.props.school.name}?`;
+        var confirmText = 'Are you sure you want to draft ' + this.props.school.name + '?';
         var ans = confirm(confirmText);
         if (!ans) return;
 
