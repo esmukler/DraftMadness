@@ -4,6 +4,12 @@ class LeaguesController < ApplicationController
 
   before_action :check_if_in_league, only: %i(leaderboard bracket draft_room)
 
+  def index
+    @leagues = League.all.order(created_at: :desc).select do |league|
+      !league.full?
+    end
+  end
+
   def new
     @league = League.new
   end

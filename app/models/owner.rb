@@ -9,6 +9,8 @@ class Owner < ActiveRecord::Base
 
   after_create :set_draft_order
 
+  attr_accessor :league_password
+
   def total_points
     schools.map(&:total_points).sum.round(2)
   end

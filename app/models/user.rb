@@ -54,4 +54,8 @@ class User < ActiveRecord::Base
   def owner_for(league)
     owners.find_by(league: league)
   end
+
+  def commissioner?(league)
+    self == league.commissioner
+  end
 end

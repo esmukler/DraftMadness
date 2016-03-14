@@ -36,7 +36,8 @@
   <% end %>
 </table>
 <em class="pull-right">*Points Possible Remaining</em>
-<% if @schools.empty? %>
+
+<% if current_user.id == @owner.user_id && @schools.empty? %>
   <p>You haven't selected any schools yet.</p>
   <p>
     Go to the

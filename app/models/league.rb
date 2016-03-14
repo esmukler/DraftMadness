@@ -11,7 +11,7 @@ class League < ActiveRecord::Base
   end
 
   def turn_for?(owner)
-    return false unless owner
+    return false unless owner && owner.draft_pick
 
     owner = owner.draft_pick
     league = current_draft_pick

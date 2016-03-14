@@ -8,12 +8,18 @@ class OwnersController < ApplicationController
 
   def create
     @owner = @league.owners.new(owner_params)
+    open_sesame = @league.password == params[:owner][:league_password]
 
-    if @owner.save
-      flash[:notice] = 'Squad successfully created!'
-      redirect_to league_leaderboard_path(@owner.league)
+    if open_sesame
+      if @owner.save
+        flash[:notice] = 'Squad successfully created!'
+        redirect_to league_leaderboard_path(@owner.league)
+      else
+        flash[:errors] = @owner.errors.full_messages.join(', ')
+        render :new
+      end
     else
-      flash[:errors] = @owner.errors.full_messages.join(', ')
+      flash[:errors] = 'League password was incorrect'
       render :new
     end
   end

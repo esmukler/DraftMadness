@@ -1,0 +1,24 @@
+<% if @leagues.any? %>
+  <h3>Available Leagues</h3>
+
+  <table class="table table table-hover">
+    <tr>
+      <th>League Name</th>
+      <th>Created At</th>
+      <th>Number of Owners</th>
+      <th></th>
+    </tr>
+    <% @leagues.each do |league| %>
+      <tr>
+        <td><%= league.name %></td>
+        <td><%= league.created_at.strftime('%b. %-d, %l:%M%P') %></td>
+        <td><%= league.owners.count %></td>
+        <td><%= link_to 'Join League?', new_league_owner_path(league) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h3>There are no available leagues.</h3>
+  <%= link_to 'Create Your Own League', new_league_path, class: 'btn btn-primary' %>
+  <%= link_to 'Back to your Homepage', user_path(current_user), class: 'btn btn-default' %>
+<% end %>

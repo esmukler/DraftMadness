@@ -1,0 +1,47 @@
+<div class="text-center">
+  <h2>Rules</h2>
+
+  <h4>Tired of filling out brackets that instantly blow up after the first weekend of March Madness?</h4>
+  <p>So were we. That’s why we decided to “Draft the Madness.”</p>
+</div>
+
+<p>The concept is simple: form a group of eight people, draft eight schools each, and root your squads to victory.</p>
+<p>But not all wins are created equally.</p>
+<p>
+  You'll get a flat score for every win, plus a bonus based on how often in the past your team’s seed had won in a particular round
+  (don't worry - we crunched the data ahead of time for you).
+</p>
+
+<p>Gather your friends, coworkers and fellow degenerate gamblers and play along!</p>
+
+<h3>The Draft</h3>
+
+<ol>
+  <li>Snake-style (Even-numbered rounds run in reverse order from odd-numbered rounds).</li>
+  <li>Will include 64 schools (or "options," see rule No. 3 below); you pick 8 to fill your roster.</li>
+  <li>
+    Should you want to draft one of the eight teams playing in the
+    <%= link_to 'First Four', 'https://en.wikipedia.org/wiki/NCAA_Men%27s_Division_I_Basketball_Championship#First_Four' %>,
+    you will draft that team AND its First Four opponent.
+    For the remainder of the tournament, you will get credit for any wins EITHER team accumulates starting with the main draw of 64.
+  </li>
+  <li>
+    Your first four draft picks MUST come from the four different regions of the bracket
+    (this is to minimize the instances of you playing against yourself).
+  </li>
+</ol>
+
+<h3>The Scoring</h3>
+
+<p>A simple formula spits out the score for each win, given the seed and the round of the winning team:</p>
+
+<p>Points = 10 + 10 * (1 - P(given seed winning in given round) )</p>
+
+<p>In plain terms: Every win gets 10 points and a bonus is added based on how historically improbable that seed winning in that round was.</p>
+<p>Some examples:</p>
+<ul>
+  <li>A win for a No. 1-seeded team in the Round of 64 would net 10 points: the base for any win plus no bonus because No. 1 seeds have won 100% of their first-round games.</li>
+  <li>A win for a No. 7-seeded team in the Sweet 16 would net 19.34 points: the base amount plus a bonus of 9.34 points because historically only 6.6% of No. 7 seeds make it past the Sweet 16.</li>
+</ul>
+
+<p>We have also decided to award a three-point bonus for any upset that has never happened before, upping the maximum number of points for a never-before-seen win to 23.</p>

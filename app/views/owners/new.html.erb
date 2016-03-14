@@ -11,5 +11,16 @@
 
   <%= f.hidden_field :user_id, value: current_user.id %>
 
+  <% if current_user.commissioner?(@league) %>
+    <%= f.hidden_field :league_password, value: @league.password %>
+
+  <% else %>
+    <%= f.input :league_password %>
+    <span class="help-block">
+      Enter the league password for <%= @league.name %>.
+    </span>
+    </br>
+  <% end %>
+
   <%= f.button :submit, 'Get to the Bracket!', class: 'btn btn-primary' %>
 <% end %>

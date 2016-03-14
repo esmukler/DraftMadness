@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     get '/logout', to: 'devise/sessions#destroy'
   end
 
+  get '/rules', to: 'static_pages#rules'
+  get '/contact', to: 'static_pages#contact'
+
   resources :users, only: :show
 
   resources :schools, only: :show
@@ -39,7 +42,6 @@ Rails.application.routes.draw do
     end
 
     resources :leagues do
-      get 'leaderboard'
       resources :owners
     end
 
