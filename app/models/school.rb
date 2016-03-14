@@ -18,7 +18,9 @@ class School < ActiveRecord::Base
   end
 
   def alive?
-    Game.where(losing_team_id: id).empty?
+    @alive = Rails.cache.fetch "school:#{id}:alive", expires_in: 1.day do
+      Game.where(losing_team_id: id).empty?
+    end
   end
 
   def total_points

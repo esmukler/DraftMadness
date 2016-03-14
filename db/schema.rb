@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314033427) do
+ActiveRecord::Schema.define(version: 20160314231307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,11 @@ ActiveRecord::Schema.define(version: 20160314033427) do
     t.integer  "draft_pick", null: false
     t.integer  "league_id",  null: false
   end
+
+  add_index "owner_schools", ["owner_id"], name: "index_owner_schools_on_owner_id", using: :btree
+  add_index "owner_schools", ["school_id", "league_id"], name: "index_owner_schools_on_school_id_and_league_id", using: :btree
+  add_index "owner_schools", ["school_id", "owner_id"], name: "index_owner_schools_on_school_id_and_owner_id", using: :btree
+  add_index "owner_schools", ["school_id"], name: "index_owner_schools_on_school_id", using: :btree
 
   create_table "owners", force: :cascade do |t|
     t.integer  "user_id",                    null: false

@@ -9,8 +9,8 @@ var School = React.createClass({
     render: function() {
         var props = this.props.owner;
         var classNames = 'owner col-md-3 text-center';
-        classNames += props.is_current_user ? ' me' : '';
-        classNames += props.current_turn ? ' bg-success' : '';
+        classNames += props.is_current_user ? ' bg-success' : '';
+        classNames += props.current_turn ? ' current-turn' : '';
 
         var text = this.props.owner.name + ' (' + this.props.owner.draft_pick + ')';
 
