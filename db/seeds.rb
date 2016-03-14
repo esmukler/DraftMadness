@@ -39,7 +39,7 @@ Seed.where("seed_number <= ?", 8).each do |seed|
   )
 end
 
-# Create other games
+# TODO: Create other games
 
 # 4.times do |index|
 #   # games = Game.where(round: index)
