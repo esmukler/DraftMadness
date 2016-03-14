@@ -18,7 +18,7 @@
     <% end %>
   </table>
 <% else %>
-  <h3>There are no available leagues.</h3>
+  <h3>There are no available leagues for you to join.</h3>
   <%= link_to 'Create Your Own League', new_league_path, class: 'btn btn-primary' %>
   <%= link_to 'Back to your Homepage', user_path(current_user), class: 'btn btn-default' %>
 <% end %>

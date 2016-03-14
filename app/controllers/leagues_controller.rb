@@ -6,7 +6,7 @@ class LeaguesController < ApplicationController
 
   def index
     @leagues = League.all.order(created_at: :desc).select do |league|
-      !league.full?
+      !league.full? && !current_user.leagues.include?(league)
     end
   end
 
