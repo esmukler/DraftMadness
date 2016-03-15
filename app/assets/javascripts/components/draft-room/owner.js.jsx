@@ -16,7 +16,7 @@ var School = React.createClass({
 
         return (
             <div className={classNames}>
-                {text}
+                <a href={this.props.owner.url}>{text}</a>
             </div>
         );
     }
