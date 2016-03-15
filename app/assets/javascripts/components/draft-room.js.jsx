@@ -69,7 +69,7 @@ var DraftRoom = React.createClass({
                 owner_id: this.props.current_owner.id,
                 school_id: chosenSchoolID,
                 league_id: this.props.league.id,
-                draft_pick: this.props.league.current_draft_pick
+                draft_pick: this.state.currentDraftPick
             }
         }
 
