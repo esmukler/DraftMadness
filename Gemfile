@@ -38,6 +38,7 @@ group :production do
 
   # caching
   gem 'dalli'
+  gem 'memcachier'
 end
 
 group :development, :test do
