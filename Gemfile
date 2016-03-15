@@ -36,9 +36,11 @@ group :production do
   # better server
   gem 'puma'
 
+  gem 'memcachier'
   # caching
   gem 'dalli'
-  gem 'memcachier'
+
+  gem 'connection_pool'
 end
 
 group :development, :test do
