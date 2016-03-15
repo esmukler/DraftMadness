@@ -14,23 +14,21 @@ class School < ActiveRecord::Base
   def games
     @games = Rails.cache.fetch "school:#{id}:games", expires_in: 1.day do
       Game.where("school1_id = ? OR school2_id = ?", id, id).
-           order(:start_time)
+           order(:start_time).to_a
     end
   end
 
   def alive?
     @alive = Rails.cache.fetch "school:#{id}:alive", expires_in: 1.day do
-      Game.where(losing_team_id: id).empty?
+      Game.where(losing_team_id: id).empty? ? true : false
     end
   end
 
   def total_points
     return 0 unless games.any?
 
-    games.select do |game|
-      won?(game)
-    end.map do |game|
-      seed.points_for_winning(game.round)
+    games.map do |game|
+      won?(game) ? seed.points_for_winning(game.round) : 0
     end.sum.round(2)
   end
 
@@ -40,7 +38,7 @@ class School < ActiveRecord::Base
 
   def started?
     return unless games.any?
-    first_start_time = games.order(:start_time).first.start_time
+    first_start_time = games.first.start_time
     first_start_time && first_start_time < Time.zone.now
   end
 
@@ -60,7 +58,9 @@ class School < ActiveRecord::Base
   end
 
   def score_for_round(round)
-    game = games.find_by(round: round)
+    game = games.detect do |gm|
+      gm.round == round
+    end
     return 0 unless game && won?(game)
 
     seed.points_for_winning(round)
