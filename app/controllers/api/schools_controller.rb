@@ -5,6 +5,6 @@ class Api::SchoolsController < ApplicationController
 
     @league = @owner.league
 
-    @schools = School.all.sort_by(&:seed_number)
+    @schools = School.all.includes(:seed, :owners, :leagues).sort_by(&:seed_number)
   end
 end

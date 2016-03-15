@@ -4,6 +4,7 @@ class School < ActiveRecord::Base
   belongs_to :seed
   has_many :owner_schools
   has_many :owners, through: :owner_schools
+  has_many :leagues, through: :owner_schools
 
   def full_name
     return name unless mascot.present?
@@ -74,10 +75,10 @@ class School < ActiveRecord::Base
   end
 
   def owned_by?(owner)
-    OwnerSchool.where(school: self, owner: owner).any?
+    owners.include?(owner)
   end
 
   def selected_in?(league)
-    OwnerSchool.where(school: self, league: league).any?
+    leagues.include?(league)
   end
 end
