@@ -1,0 +1,13 @@
+<h2>Edit Your Squad</h2>
+
+<%= simple_form_for :owner, url: league_owner_url, method: :patch, html: { class: 'form-vertical' } do |f| %>
+
+  <%= f.input :team_name, label: 'Name', html: { maxlength: 255 } %>
+  </br>
+
+  <%= f.input :motto, as: :text, label: 'Motto', input_html: { cols: 50 },
+    required: false, placeholder: "Win or go home." %>
+  </br>
+
+  <%= f.button :submit, 'Update Info', class: 'btn btn-primary' %>
+<% end %>

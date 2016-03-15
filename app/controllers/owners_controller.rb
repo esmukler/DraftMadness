@@ -24,6 +24,22 @@ class OwnersController < ApplicationController
     end
   end
 
+  def edit
+    @owner = Owner.find(params[:id])
+  end
+
+  def update
+    @owner = Owner.find(params[:id])
+
+    if @owner.update(owner_params)
+      flash[:notice] = 'Squad successfully updated!'
+      redirect_to league_owner_path(@league, @owner)
+    else
+      flash[:errors] = @owner.errors.full_messages.join(', ')
+      render :edit
+    end
+  end
+
   def show
     @owner = Owner.find(params[:id])
     @schools = @owner.owner_schools.order(:draft_pick).map(&:school)
