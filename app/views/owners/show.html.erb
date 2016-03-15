@@ -4,7 +4,9 @@
   <h2><%= @owner.team_name %></h2>
   <h4>
     <%= @owner.motto %>
-    <%= link_to 'Edit Squad Info', edit_league_owner_path(@league, @owner), class: 'btn' %>
+    <% if @owner.user_id == current_user.id %>
+      <%= link_to 'Edit Squad Info', edit_league_owner_path(@league, @owner), class: 'btn' %>
+    <% end %>
   </h4>
   <h4><%= @owner.user.email %></h4>
 </div>
