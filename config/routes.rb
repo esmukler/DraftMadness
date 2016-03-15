@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     end
 
     resources :leagues do
+      get 'draft_room'
       resources :owners
     end
 

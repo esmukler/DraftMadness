@@ -1,8 +1,10 @@
 var School = React.createClass({
     handleClick: function(e) {
         e.preventDefault();
-        if (!this.props.userInfo.currentOwnerTurn ||
-            this.props.school.selected) {
+        if (!this.props.currentOwnerTurn ||
+            this.props.school.selected ||
+            this.props.blockedForUser
+        ) {
                 return;
         }
 
@@ -21,6 +23,8 @@ var School = React.createClass({
             classNames += ' bg-success';
         } else if (school.selected) {
             classNames += ' bg-danger';
+        } else if (this.props.blockedForUser) {
+            classNames += ' blocked';
         } else if (this.props.currentOwnerTurn) {
             classNames += ' available';
         }

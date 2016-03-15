@@ -32,11 +32,15 @@
     }
     .school {
       padding: 10px 0;
-    }
-    .school.available:hover {
-      background: $bball-court;
-      font-weight: bold;
-      cursor: pointer;
+
+      &.blocked {
+        background: #eee;
+      }
+      &.available:hover {
+        background: $bball-court;
+        font-weight: bold;
+        cursor: pointer;
+      }
     }
   }
 }

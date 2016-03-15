@@ -65,4 +65,8 @@ class Owner < ActiveRecord::Base
   def current_turn?
     league.turn_for?(self)
   end
+
+  def selected_regions
+    schools.map(&:region)
+  end
 end

@@ -6,7 +6,9 @@ var DraftRoom = React.createClass({
       return {
         schools: [],
         owners: [],
-        currentOwnerTurn: this.props.currentOwnerTurn
+        currentDraftPick: this.props.league.current_draft_pick,
+        blockedRegions: this.props.current_owner.regions,
+        currentOwnerTurn: this.props.current_owner.turn
       };
     },
 
@@ -17,7 +19,7 @@ var DraftRoom = React.createClass({
           type: 'GET',
           dataType: 'json',
           data: {
-            current_owner_id: this.props.currentOwnerID
+            current_owner_id: this.props.current_owner.id
           },
           success: function(data) {
               this.setState({
@@ -28,7 +30,7 @@ var DraftRoom = React.createClass({
     },
 
     fetchOwners: function() {
-      var url = '/api/leagues/' + this.props.leagueID + '/owners';
+      var url = '/api/leagues/' + this.props.league.id + '/owners';
 
       $.ajax(url, {
           type: 'GET',
@@ -64,10 +66,10 @@ var DraftRoom = React.createClass({
 
         var data = {
             owner_school: {
-                owner_id: this.props.currentOwnerID,
+                owner_id: this.props.current_owner.id,
                 school_id: chosenSchoolID,
-                league_id: this.props.leagueID,
-                draft_pick: this.props.currentDraftPick
+                league_id: this.props.league.id,
+                draft_pick: this.props.league.current_draft_pick
             }
         }
 
@@ -77,9 +79,13 @@ var DraftRoom = React.createClass({
             data: data,
             success: function(data) {
                 var schoolID = data.school.id;
+                var currentDraftPick = this.state.currentDraftPick + 1;
+                var blockedRegions = this.state.blockedRegions.concat(data.school.region)
 
                 this.setState({
-                  currentOwnerTurn: data.current_owner_turn
+                  currentOwnerTurn: data.current_owner_turn,
+                  currentDraftPick: currentDraftPick,
+                  blockedRegions: blockedRegions
                 });
                 this.updateSchool(schoolID);
                 this.fetchOwners();
@@ -109,16 +115,23 @@ var DraftRoom = React.createClass({
         })
 
         var schools = this.state.schools.map(function(school) {
+            var blockedForUser;
+            if (this.state.currentDraftPick <= 32 &&
+                this.state.blockedRegions.indexOf(school.region) !== -1
+            ) {
+                blockedForUser = true;
+            }
+
             return <School
                 key={school.id}
-                userInfo={this.props}
+                blockedForUser={blockedForUser}
                 currentOwnerTurn={this.state.currentOwnerTurn}
                 school={school}
                 createOS={this.createOS}
             />;
         }.bind(this));
 
-        var regionNames = ['South', 'West', 'East', 'Midwest'];
+        var regionNames = ['East', 'Midwest', 'South', 'West'];
         var regions = regionNames.map(function(regionName) {
             return (
               <div className="region col-md-3 text-center">
