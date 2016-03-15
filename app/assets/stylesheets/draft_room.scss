@@ -8,13 +8,27 @@
     font-weight: bold;
   }
 
+  .schools-key, .owners-key {
+    margin-bottom: 20px;
+    border-bottom: 1px solid $bball-orange;
+  }
+
   .owners {
     margin-bottom: 20px;
 
-    .owner {
-      padding: 10px 0;
+    .owners-container {
+      margin-bottom: 10px;
 
-      &.current-turn {
+      .owner {
+        padding: 10px 0;
+
+        &.current-turn {
+          font-weight: bold;
+        }
+      }
+    }
+    .owners-key {
+      .current-turn {
         font-weight: bold;
       }
     }
@@ -30,16 +44,26 @@
         background: $bball-court;
       }
     }
-    .school {
-      padding: 10px 0;
 
-      &.blocked {
+    .schools-key {
+      .blocked {
         background: #eee;
       }
-      &.available:hover {
-        background: $bball-court;
-        font-weight: bold;
-        cursor: pointer;
+    }
+    .schools-container {
+      margin-bottom: 20px;
+
+      .school {
+        padding: 10px 0;
+
+        &.blocked {
+          background: #eee;
+        }
+        &.available:hover {
+          background: $bball-court;
+          font-weight: bold;
+          cursor: pointer;
+        }
       }
     }
   }

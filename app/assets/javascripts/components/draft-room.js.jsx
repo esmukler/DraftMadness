@@ -148,6 +148,20 @@ var DraftRoom = React.createClass({
                     <div className="section-header">
                         Owners:
                     </div>
+
+                    <div className="owners-key row">
+                        <div className="col-md-4 text-right">
+                            Key:
+                        </div>
+                        <div className="col-md-2 text-center bg-success me">
+                            Me
+                        </div>
+                        <div className="col-md-2 text-center current-turn">
+                            Current Pick
+                        </div>
+                        <div className="col-md-4"></div>
+                    </div>
+
                     <div className="owners-container row">
                         {owners}
                     </div>
@@ -157,12 +171,37 @@ var DraftRoom = React.createClass({
                     <div className="section-header">
                         Schools:
                     </div>
+
+                    <div className="schools-key row">
+                        <div className="col-md-2 text-right">
+                            Key:
+                        </div>
+                        <div className="col-md-2 text-center">
+                            Available
+                        </div>
+                        <div className="col-md-2 text-center bg-success me">
+                            My Squad
+                        </div>
+                        <div className="col-md-2 text-center bg-danger">
+                            Already Selected
+                        </div>
+                        <div className="col-md-2 text-center blocked">
+                            Blocked*
+                        </div>
+                        <div className="col-md-2"></div>
+                    </div>
+
                     <div className="regions row">
                         {regions}
                     </div>
+
                     <div className="schools-container row">
                         {schools}
                     </div>
+                    <em className="pull-right">
+                        *In the first four rounds, you may only draft
+                        one school from each region.
+                    </em>
                 </div>
             </div>
         );
