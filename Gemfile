@@ -32,6 +32,9 @@ gem 'simple_form'
 
 group :production do
   gem 'rails_12factor'
+
+  # better server
+  gem 'puma'
 end
 
 group :development, :test do
