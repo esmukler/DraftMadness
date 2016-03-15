@@ -35,6 +35,9 @@ group :production do
 
   # better server
   gem 'puma'
+
+  # caching
+  gem 'dalli'
 end
 
 group :development, :test do
