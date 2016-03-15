@@ -19,6 +19,14 @@ class Seed < ActiveRecord::Base
     [86.49, 96.08, 101.76, 104.59, 112.10, 108.41, 111.34, 112.72, 120.25, 122.63, 120.47, 123.55175, 129.40, 130.34, 131.32, 138]
   ]
 
+  def self.points_for_winning(seed_number, round)
+    WINNING_POINTS[round][seed_number - 1]
+  end
+
+  def self.points_for_winning_it_all(seed_number)
+    WINNING_POINTS[6][seed_number - 1]
+  end
+
   def points_for_winning(round)
     # must -1 to get correct index
     WINNING_POINTS[round][seed_number - 1]

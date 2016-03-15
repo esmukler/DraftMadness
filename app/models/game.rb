@@ -8,8 +8,8 @@ class Game < ActiveRecord::Base
   has_many :previous_games, class_name: 'Game', foreign_key: 'next_game_id'
 
   ROUND_NAMES = [
-    'Second Round', 'Third Round', 'Sweet Sixteen',
-    'Elite Eight', 'Final Four', 'Championship'
+    'Round of 64', 'Round of 32', 'Sweet 16',
+    'Elite 8', 'Final 4', 'Title Game'
   ]
 
   def self.current_games

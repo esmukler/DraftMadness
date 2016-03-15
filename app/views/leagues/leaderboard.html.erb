@@ -6,12 +6,9 @@
       <th>Ranking</th>
       <!-- <th>Has Paid?</th> -->
       <th>Owner Name</th>
-      <th>2nd Round</th>
-      <th>3rd Round</th>
-      <th>Sweet 16</th>
-      <th>Elite 8</th>
-      <th>Final 4</th>
-      <th title="National Championship">Title Game</th>
+      <% 6.times do |round| %>
+        <th><%= Game::ROUND_NAMES[round] %></th>
+      <% end %>
       <th title="Points Possible Remaining">PPR*</th>
       <th>Max</th>
       <th>TOTAL</th>
@@ -22,10 +19,10 @@
         <!-- <th><%= owner.has_paid %></th> -->
         <th><%= link_to owner.team_name, league_owner_path(@league, owner) %></th>
         <% 6.times do |round| %>
-          <th><%= owner.score_for_round(round) %></th>
+          <td><%= owner.score_for_round(round) %></td>
         <% end %>
-        <th><%= owner.ppr %></th>
-        <th><%= owner.max %></th>
+        <td><%= owner.ppr %></td>
+        <td><%= owner.max %></td>
         <th><%= owner.total_points %></th>
         </tr>
     <% end %>

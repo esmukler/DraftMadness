@@ -10,12 +10,9 @@
     <th>School</th>
     <th>Seed</th>
     <th>Region</th>
-    <th>2nd Round</th>
-    <th>3rd Round</th>
-    <th>Sweet 16</th>
-    <th>Elite 8</th>
-    <th>Final 4</th>
-    <th title="National Championship">Title Game</th>
+    <% 6.times do |round| %>
+      <th><%= Game::ROUND_NAMES[round] %></th>
+    <% end %>
     <th title="Points Possible Remaining">PPR*</th>
     <th>Max</th>
     <th>TOTAL</th>
@@ -24,13 +21,13 @@
     <tr>
       <th><%= @owner.pick_for(school) %></th>
       <th><%= link_to school.full_name, school_path(school) %></th>
-      <th><%= school.seed_number %></th>
-      <th><%= school.region %></th>
+      <td><%= school.seed_number %></td>
+      <td><%= school.region %></td>
       <% 6.times do |round| %>
-        <th><%= school.score_for_round(round) %></th>
+        <td><%= school.score_for_round(round) %></td>
       <% end %>
-      <th><%= school.ppr %></th>
-      <th><%= school.max %></th>
+      <td><%= school.ppr %></td>
+      <td><%= school.max %></td>
       <th><%= school.total_points %></th>
     </tr>
   <% end %>
