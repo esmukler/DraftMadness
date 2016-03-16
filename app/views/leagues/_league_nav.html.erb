@@ -11,11 +11,17 @@
     <%= link_to 'Bracket', league_bracket_path(league) %>
   </li>
 
-  <li class="<%= action_name == 'draft_room' ? 'active' : '' %>">
-    <%= link_to 'Draft Room', league_draft_room_path(league) %>
-  </li>
+  <% unless league.drafted? %>
+    <li class="<%= action_name == 'draft_room' ? 'active' : '' %>">
+      <%= link_to 'Draft Room', league_draft_room_path(league) %>
+    </li>
+  <% end %>
 
   <li class="<%= action_name == 'points_board' ? 'active' : '' %>">
     <%= link_to 'Points Board', league_points_board_path(league) %>
+  </li>
+
+  <li class="<%= action_name == 'draft_results' ? 'active' : '' %>">
+    <%= link_to 'Draft Results', league_draft_results_path(league) %>
   </li>
 </ul>

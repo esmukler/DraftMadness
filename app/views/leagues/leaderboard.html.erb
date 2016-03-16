@@ -1,31 +1,35 @@
 <%= render 'header', league: @league %>
 
-<div class="row">
-  <table class="table table-responsive table-hover table-condensed">
-    <tr class="active">
-      <th>Ranking</th>
-      <!-- <th>Has Paid?</th> -->
-      <th>Owner Name</th>
-      <% 6.times do |round| %>
-        <th><%= Game::ROUND_NAMES[round] %></th>
-      <% end %>
-      <th title="Points Possible Remaining">PPR*</th>
-      <th>Max</th>
-      <th>TOTAL</th>
-    </tr>
-    <% @league.owners.sort_by(&:current_ranking).each do |owner| %>
-      <tr>
-        <th><%= owner.current_ranking %></th>
-        <!-- <th><%= owner.has_paid %></th> -->
-        <th><%= link_to owner.team_name, league_owner_path(@league, owner) %></th>
+<% cache(@league, expires_in: 1.hour) do %>
+
+  <div class="row">
+    <table class="table table-responsive table-hover table-condensed">
+      <tr class="active">
+        <th>Ranking</th>
+        <!-- <th>Has Paid?</th> -->
+        <th>Owner Name</th>
         <% 6.times do |round| %>
-          <td><%= owner.score_for_round(round) %></td>
+          <th><%= Game::ROUND_NAMES[round] %></th>
         <% end %>
-        <td><%= owner.ppr %></td>
-        <td><%= owner.max %></td>
-        <th><%= owner.total_points %></th>
-        </tr>
-    <% end %>
-  </table>
-  <em class="pull-right">*Points Possible Remaining</em>
-</div>
+        <th title="Points Possible Remaining">PPR*</th>
+        <th>Max</th>
+        <th>TOTAL</th>
+      </tr>
+      <% @league.owners.sort_by(&:current_ranking).each do |owner| %>
+        <tr>
+          <th><%= owner.current_ranking %></th>
+          <!-- <th><%= owner.has_paid %></th> -->
+          <th><%= link_to owner.team_name, league_owner_path(@league, owner) %></th>
+          <% 6.times do |round| %>
+            <td><%= owner.score_for_round(round) %></td>
+          <% end %>
+          <td><%= owner.ppr %></td>
+          <td><%= owner.max %></td>
+          <th><%= owner.total_points %></th>
+          </tr>
+      <% end %>
+    </table>
+    <em class="pull-right">*Points Possible Remaining</em>
+  </div>
+
+<% end %>

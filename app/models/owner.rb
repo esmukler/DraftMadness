@@ -67,6 +67,6 @@ class Owner < ActiveRecord::Base
   end
 
   def selected_regions
-    schools.map(&:region)
+    schools.includes(:seed).map(&:region)
   end
 end

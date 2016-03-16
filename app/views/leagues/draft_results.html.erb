@@ -1,0 +1,29 @@
+<%= render 'header', league: @league %>
+
+<div class="section">
+
+  <h3 class="text-center">Draft Results</h3>
+
+  <table class="table table-responsive table-hover table-condensed">
+    <tr class="active">
+      <th>Round</th>
+      <th>Pick</th>
+      <th>Owner</th>
+      <th>School</th>
+      <th>Region</th>
+      <th>Seed</th>
+      <th>Total Points</th>
+    </tr>
+    <% @owner_schools.each do |os| %>
+      <tr>
+        <td><%= os.draft_round %></td>
+        <td><%= os.draft_pick %></td>
+        <td><%= link_to os.owner.team_name, league_owner_path(@league, os.owner) %></td>
+        <td><%= link_to os.school.full_name, school_path(os.school) %></td>
+        <td><%= os.school.seed_number %></td>
+        <td><%= os.school.region %></td>
+        <td><%= os.school.total_points %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

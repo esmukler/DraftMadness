@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get 'draft_room'
     get 'points_board'
     get 'new_invite'
+    get 'draft_results'
     post 'invite'
     resources :owners
   end

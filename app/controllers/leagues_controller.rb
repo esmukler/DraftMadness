@@ -1,8 +1,6 @@
 class LeaguesController < ApplicationController
-  before_action :get_league,
-    only: %i(new_invite invite leaderboard bracket draft_room points_board)
-
-  before_action :check_if_in_league, only: %i(leaderboard bracket draft_room points_board)
+  before_action :get_league, except: %i(index new create)
+  before_action :check_if_in_league, except: %i(index new create)
 
   def index
     @leagues = League.all.order(created_at: :desc).select do |league|
@@ -34,6 +32,10 @@ class LeaguesController < ApplicationController
   end
 
   def draft_room
+  end
+
+  def draft_results
+    @owner_schools = @league.owner_schools.includes(:owner, :school).order(:draft_pick)
   end
 
   def points_board

@@ -5,12 +5,9 @@ class OwnerSchool < ActiveRecord::Base
 
   validates :owner, :school, presence: true
   validates :school, uniqueness: { scope: :league }
-  validate :is_valid_pick
 
-  private
-
-  def is_valid_pick
-    true
-    # if in the first four rounds can't pick two schools from the same region
+  def draft_round
+    round = draft_pick / 8
+    draft_pick % 8 == 0 ? round : round + 1
   end
 end
