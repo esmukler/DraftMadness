@@ -30,6 +30,9 @@ gem 'browserify-rails'
 
 gem 'simple_form'
 
+# SMS messaging
+gem 'twilio-ruby'
+
 group :production do
   gem 'rails_12factor'
 
