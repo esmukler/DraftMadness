@@ -75,10 +75,10 @@ class School < ActiveRecord::Base
   end
 
   def owned_by?(owner)
-    owners.include?(owner)
+    owner_ids.include?(owner.id)
   end
 
   def selected_in?(league)
-    leagues.include?(league)
+    league_ids.include?(league.id)
   end
 end
