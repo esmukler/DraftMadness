@@ -32,7 +32,7 @@ class GamesController < ApplicationController
     else
       game.next_game.update!(school2_id: winning_team_id)
     end
-    binding.pry
+
     redirect_to admin_games_url
   end
 

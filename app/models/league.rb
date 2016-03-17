@@ -4,6 +4,7 @@ class League < ActiveRecord::Base
   belongs_to :commissioner, class_name: 'User'
   has_many :owners, dependent: :destroy
   has_many :owner_schools, dependent: :destroy
+  has_many :schools, through: :owner_schools
 
   attr_accessor :invite_emails
 
