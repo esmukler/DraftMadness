@@ -25,6 +25,7 @@ class LeaguesController < ApplicationController
   end
 
   def leaderboard
+    @owners = @league.owners.sort
   end
 
   def bracket

@@ -15,7 +15,7 @@
         <th>Max</th>
         <th>TOTAL</th>
       </tr>
-      <% @league.owners.sort_by(&:current_ranking).each do |owner| %>
+      <% @owners.each do |owner| %>
         <tr>
           <th><%= owner.current_ranking %></th>
           <!-- <th><%= owner.has_paid %></th> -->
@@ -26,7 +26,7 @@
           <td><%= owner.ppr %></td>
           <td><%= owner.max %></td>
           <th><%= owner.total_points %></th>
-          </tr>
+        </tr>
       <% end %>
     </table>
     <em class="pull-right">*Points Possible Remaining</em>

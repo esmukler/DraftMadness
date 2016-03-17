@@ -1,5 +1,8 @@
-<% cache(game, expires_in: 1.hour) do %>
+<%# cache(game, expires_in: 1.hour) do %>
   <div class="game col-md-3">
+    <div class="round-name">
+      <%= game.round_name %>
+    </div>
     <div class="start-time">
       <% if game.start_time %>
         <%= game.start_time.strftime('%b. %-d, %l:%M%P') %>
@@ -8,7 +11,16 @@
     <% end %>
     </div>
 
-    <div class="team-one"><%= game.school1.full_name %></div>
-    <div class="team-two"><%= game.school2.full_name %></div>
+    <div class="team-one">
+      <%= link_to game.school1.full_name, school_path(game.school1) %>
+      <%= game.school1_score %>
+    </div>
+
+    <% if game.school2 %>
+      <div class="team-two">
+        <%= link_to game.school2.full_name, school_path(game.school2) %>
+        <%= game.school2_score %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+<%# end %>

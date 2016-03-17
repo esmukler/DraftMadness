@@ -17,6 +17,17 @@ class Game < ActiveRecord::Base
     where('start_time < ?', Time.zone.now)
   end
 
+  def self.pending_games
+    where.not(is_over: true).
+      where.not(school1_id: nil).
+      where.not(school2_id: nil).
+      order(:start_time)
+  end
+
+  def self.completed_games
+    where(is_over: true).order(:start_time)
+  end
+
   def round_name
     ROUND_NAMES[round]
   end

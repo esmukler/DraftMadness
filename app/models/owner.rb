@@ -1,4 +1,6 @@
 class Owner < ActiveRecord::Base
+  include Comparable
+
   belongs_to :user
   belongs_to :league
   has_many :owner_schools
@@ -18,13 +20,22 @@ class Owner < ActiveRecord::Base
   def current_ranking
     return nil unless schools.map(&:started?).any?
 
-    league.owners.sort do |a,b|
-      b.total_points - a.total_points
+    league.owners.sort_by do |x|
+      -x.total_points
     end.each_with_index do |owner, idx|
       next unless owner.id == id
       return idx + 1
     end
     nil
+  end
+
+  # for calling .sort
+  def <=>(other)
+    return 0 if !current_ranking && !other.current_ranking
+    return 1 if !current_ranking
+    return -1 if !other.current_ranking
+
+    other.current_ranking <=> current_ranking
   end
 
   def score_for_round(round)
@@ -38,7 +49,7 @@ class Owner < ActiveRecord::Base
   end
 
   def max
-    schools.map(&:ppr).sum.round(2)
+    schools.map(&:max).sum.round(2)
   end
 
   def pick_for(school)
@@ -72,7 +83,7 @@ class Owner < ActiveRecord::Base
 
   def pending_games
     schools.map(&:games).flatten.select do |game|
-      !game.is_over
+      !game.is_over && game.school1
     end.sort_by do |game|
       game.start_time || Time.now
     end

@@ -13,7 +13,12 @@
   border: 3px sold $bball-dark-court;
   border-radius: 5px;
 
+  .round-name {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
   .start-time {
-    margin-bottom: 20px
+    margin-bottom: 20px;
   }
 }

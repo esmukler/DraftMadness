@@ -1,0 +1,23 @@
+<div class="game col-md-3">
+  <div class="start-time">
+    <% if game.start_time %>
+      <%= game.start_time.strftime('%b. %-d, %l:%M%P') %>
+    <% else %>
+      Start Time TBD
+  <% end %>
+  </div>
+  <%= simple_form_for game, url: game_url(game), method: 'PATCH' do |f| %>
+
+    <div class="team-one">
+      <%= game.school1.full_name %>
+
+      <%= f.input :school1_score, input_html: { value: f.object.school1_score } %>
+    </div>
+    <div class="team-two">
+      <%= game.school2.full_name %>
+
+      <%= f.input :school2_score, input_html: { value: f.object.school2_score } %>
+    </div>
+    <%= f.button :submit, 'Submit Score', class: 'btn btn-primary' %>
+  <% end %>
+</div>

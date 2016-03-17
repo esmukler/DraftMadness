@@ -12,69 +12,26 @@
 </div>
 </br>
 
-<div class="section">
-  <table class="table table-responsive table-hover table-condensed">
-    <tr class="active">
-      <th>Pick #</th>
-      <th>School</th>
-      <th>Seed</th>
-      <th>Region</th>
-      <% 6.times do |round| %>
-        <th><%= Game::ROUND_NAMES[round] %></th>
-      <% end %>
-      <th title="Points Possible Remaining">PPR*</th>
-      <th>Max</th>
-      <th>TOTAL</th>
-    </tr>
-    <% @schools.each do |school| %>
-      <tr>
-        <th><%= @owner.pick_for(school) %></th>
-        <th><%= link_to school.full_name, school_path(school) %></th>
-        <td><%= school.seed_number %></td>
-        <td><%= school.region %></td>
-        <% 6.times do |round| %>
-          <td><%= school.score_for_round(round) %></td>
-        <% end %>
-        <td><%= school.ppr %></td>
-        <td><%= school.max %></td>
-        <th><%= school.total_points %></th>
-      </tr>
+<%= render 'owner_stat_table', owner: @owner, schools: @schools, league: @league %>
+
+<% if @pending_games.any? %>
+  <div class="row">
+    <h4 class="game-header">
+      Pending Games:
+    </h4>
+    <% @pending_games.each do |game| %>
+      <%= render 'shared/game', game: game %>
     <% end %>
-  </table>
-  <em class="pull-right">*Points Possible Remaining</em>
+  </div>
+<% end %>
 
-  <% if current_user.id == @owner.user_id && @schools.empty? %>
-    <p>You haven't selected any schools yet.</p>
-    <p>
-      Go to the
-      <%= link_to 'Draft Room', league_draft_room_path(@league) %>
-      to add some schools to your squad!
-    </p>
-  <% end %>
-</div>
-
-
-<% cache(@owner, expires_in: 1.hour) do %>
-
-  <% if @pending_games.any? %>
-    <div class="row">
-      <h4 class="game-header">
-        Pending Games:
-      </h4>
-      <% @pending_games.each do |game| %>
-        <%= render 'shared/game', game: game %>
-      <% end %>
-    </div>
-  <% end %>
-
-  <% if @completed_games.any? %>
-    <div class="row">
-      <h4 class="game-header">
-        Completed Games:
-      </h4>
-      <% @completed_games.each do |game| %>
-        <%= render 'shared/game', game: game %>
-      <% end %>
-    </div>
-  <% end %>
+<% if @completed_games.any? %>
+  <div class="row">
+    <h4 class="game-header">
+      Completed Games:
+    </h4>
+    <% @completed_games.each do |game| %>
+      <%= render 'shared/game', game: game %>
+    <% end %>
+  </div>
 <% end %>

@@ -1,0 +1,17 @@
+<div class="row">
+  <h4 class="game-header">
+    Pending Games:
+  </h4>
+  <% @pending_games.each do |game| %>
+    <%= render 'admin_game', game: game %>
+  <% end %>
+</div>
+
+<div class="row">
+  <h4 class="game-header">
+    Completed Games:
+  </h4>
+  <% @completed_games.each do |game| %>
+    <%= render 'admin_game', game: game %>
+  <% end %>
+</div>

@@ -50,4 +50,9 @@ class User < ActiveRecord::Base
   def commissioner?(league)
     self == league.commissioner
   end
+
+  def admin?
+    admin_id = Rails.env.production? ? 9 : 1
+    id == admin_id
+  end
 end

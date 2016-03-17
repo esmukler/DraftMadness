@@ -32,6 +32,9 @@ Rails.application.routes.draw do
     resources :owners
   end
 
+  resources :games, only: :update
+  get '/admin_games' => 'games#admin_games'
+
   resources :owner_schools, only: %i(create destroy)
 
   namespace :api, defaults: { format: :json } do

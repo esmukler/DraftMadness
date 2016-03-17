@@ -12,14 +12,14 @@ class School < ActiveRecord::Base
   end
 
   def games
-    @games = Rails.cache.fetch "school:#{id}:games", expires_in: 1.day do
+    @games = Rails.cache.fetch "school:#{id}:games", expires_in: 1.hour do
       Game.where("school1_id = ? OR school2_id = ?", id, id).
            order(:start_time).to_a
     end
   end
 
   def alive?
-    @alive = Rails.cache.fetch "school:#{id}:alive", expires_in: 1.day do
+    @alive = Rails.cache.fetch "school:#{id}:alive", expires_in: 1.hour do
       Game.where(losing_team_id: id).empty? ? true : false
     end
   end
@@ -54,7 +54,7 @@ class School < ActiveRecord::Base
   end
 
   def max
-    total_points + ppr
+    [total_points, ppr].sum.round(2)
   end
 
   def score_for_round(round)

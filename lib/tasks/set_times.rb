@@ -3,7 +3,7 @@ def set_first_round_times
     # South
     Time.local(2016, 'mar', 17, 13),
     Time.local(2016, 'mar', 18, 9, 40),
-    Time.local(2016, 'mar', 17, 5, 50),
+    Time.local(2016, 'mar', 17, 15, 50),
     Time.local(2016, 'mar', 18, 11),
     Time.local(2016, 'mar', 18, 13, 30),
     Time.local(2016, 'mar', 17, 18, 20),
