@@ -43,6 +43,9 @@ class OwnersController < ApplicationController
   def show
     @owner = Owner.find(params[:id])
     @schools = @owner.owner_schools.order(:draft_pick).map(&:school)
+
+    @pending_games = @owner.pending_games
+    @completed_games = @owner.completed_games
   end
 
   private

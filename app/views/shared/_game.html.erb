@@ -1,0 +1,14 @@
+<% cache(game, expires_in: 1.hour) do %>
+  <div class="game col-md-3">
+    <div class="start-time">
+      <% if game.start_time %>
+        <%= game.start_time.strftime('%b. %-d, %l:%M%P') %>
+      <% else %>
+        Start Time TBD
+    <% end %>
+    </div>
+
+    <div class="team-one"><%= game.school1.full_name %></div>
+    <div class="team-two"><%= game.school2.full_name %></div>
+  </div>
+<% end %>

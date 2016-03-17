@@ -69,4 +69,18 @@ class Owner < ActiveRecord::Base
   def selected_regions
     schools.includes(:seed).map(&:region)
   end
+
+  def pending_games
+    schools.map(&:games).flatten.select do |game|
+      !game.is_over
+    end.sort_by do |game|
+      game.start_time || Time.now
+    end
+  end
+
+  def completed_games
+    schools.map(&:games).flatten.select(&:is_over).sort_by do |game|
+      game.start_time || Time.now
+    end
+  end
 end

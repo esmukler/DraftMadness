@@ -52,3 +52,29 @@
     </p>
   <% end %>
 </div>
+
+
+<% cache(@owner, expires_in: 1.hour) do %>
+
+  <% if @pending_games.any? %>
+    <div class="row">
+      <h4 class="game-header">
+        Pending Games:
+      </h4>
+      <% @pending_games.each do |game| %>
+        <%= render 'shared/game', game: game %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @completed_games.any? %>
+    <div class="row">
+      <h4 class="game-header">
+        Completed Games:
+      </h4>
+      <% @completed_games.each do |game| %>
+        <%= render 'shared/game', game: game %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

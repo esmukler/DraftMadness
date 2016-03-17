@@ -1,6 +1,25 @@
-<h2><%= @school.full_name %></h2>
-<!--
-<div>TODO:</div>
-<ul>
-  <li>list out the games with different colors based on if they won or lost</li>
-</ul> -->
+<% cache(@school, expires_in: 1.hour) do %>
+  <h2 class="school-header"><%= @school.full_name %></h2>
+
+  <% if @pending_games.any? %>
+    <div class="row">
+      <h4 class="game-header">
+        Pending Games:
+      </h4>
+      <% @pending_games.each do |game| %>
+        <%= render 'shared/game', game: game %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if true || @completed_games.any? %>
+    <div class="row">
+      <h4 class="game-header">
+        Completed Games:
+      </h4>
+      <% @pending_games.each do |game| %>
+        <%= render 'shared/game', game: game %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

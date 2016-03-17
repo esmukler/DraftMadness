@@ -28,4 +28,8 @@ class Game < ActiveRecord::Base
   def schools
     School.where(id: school_ids)
   end
+
+  def started?
+    Time.now > start_time
+  end
 end

@@ -1,0 +1,19 @@
+.school-header {
+  margin-bottom: 20px;
+}
+
+.game-header {
+  margin-left: 15px;
+}
+
+.game {
+  padding: 10px;
+  margin: 10px;
+  background: $bball-court;
+  border: 3px sold $bball-dark-court;
+  border-radius: 5px;
+
+  .start-time {
+    margin-bottom: 20px
+  }
+}
