@@ -15,9 +15,9 @@
         <th>Max</th>
         <th>TOTAL</th>
       </tr>
-      <% @owners.each do |owner| %>
+      <% @owners.each_with_index do |owner, idx| %>
         <tr>
-          <th><%= owner.current_ranking %></th>
+          <th><%= idx + 1 %></th>
           <!-- <th><%= owner.has_paid %></th> -->
           <th><%= link_to owner.team_name, league_owner_path(@league, owner) %></th>
           <% 6.times do |round| %>

@@ -17,25 +17,15 @@ class Owner < ActiveRecord::Base
     schools.map(&:total_points).sum.round(2)
   end
 
-  def current_ranking
-    return nil unless schools.map(&:started?).any?
+  def <=>(other)
+    other.total_points - total_points
+  end
 
-    league.owners.sort_by do |x|
-      -x.total_points
-    end.each_with_index do |owner, idx|
+  def current_ranking
+    league.owners.sort.each_with_index do |owner, idx|
       next unless owner.id == id
       return idx + 1
     end
-    nil
-  end
-
-  # for calling .sort
-  def <=>(other)
-    return 0 if !current_ranking && !other.current_ranking
-    return 1 if !current_ranking
-    return -1 if !other.current_ranking
-
-    other.current_ranking <=> current_ranking
   end
 
   def score_for_round(round)
