@@ -13,13 +13,13 @@
 
     <div class="team-one">
       <%= link_to game.school1.full_name, school_path(game.school1) %>
-      <%= game.school1_score %>
+      <%= game.try(:school1_score) %>
     </div>
 
     <% if game.school2 %>
       <div class="team-two">
         <%= link_to game.school2.full_name, school_path(game.school2) %>
-        <%= game.school2_score %>
+        <%= game.try(:school2_score) %>
       </div>
     <% end %>
   </div>
