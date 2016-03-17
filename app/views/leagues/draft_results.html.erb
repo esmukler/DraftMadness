@@ -15,7 +15,7 @@
       <th>Total Points</th>
     </tr>
     <% @owner_schools.each do |os| %>
-      <tr>
+      <tr class="<%= 'danger' unless os.school.alive? %>">
         <td><%= os.draft_round %></td>
         <td><%= os.draft_pick %></td>
         <td><%= link_to os.owner.team_name, league_owner_path(@league, os.owner) %></td>

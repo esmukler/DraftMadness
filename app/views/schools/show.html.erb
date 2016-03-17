@@ -12,12 +12,12 @@
     </div>
   <% end %>
 
-  <% if true || @completed_games.any? %>
+  <% if @completed_games.any? %>
     <div class="row">
       <h4 class="game-header">
         Completed Games:
       </h4>
-      <% @pending_games.each do |game| %>
+      <% @completed_games.each do |game| %>
         <%= render 'shared/game', game: game %>
       <% end %>
     </div>
