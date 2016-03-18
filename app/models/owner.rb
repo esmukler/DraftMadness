@@ -84,4 +84,8 @@ class Owner < ActiveRecord::Base
       game.start_time || Time.now
     end
   end
+
+  def schools_left_count
+    schools.select(&:alive?).count
+  end
 end

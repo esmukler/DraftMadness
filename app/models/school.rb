@@ -18,6 +18,10 @@ class School < ActiveRecord::Base
     end
   end
 
+  def self.left_alive_count
+    all.select(&:alive?).count
+  end
+
   def alive?
     @alive = Rails.cache.fetch "school:#{id}:alive", expires_in: 1.hour do
       Game.where(losing_team_id: id).empty? ? true : false
