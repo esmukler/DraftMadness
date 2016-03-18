@@ -72,7 +72,7 @@ class Owner < ActiveRecord::Base
   end
 
   def pending_games
-    schools.map(&:games).flatten.select do |game|
+    schools.map(&:games).flatten.uniq.select do |game|
       !game.is_over && game.school1
     end.sort_by do |game|
       game.start_time || Time.now
@@ -80,7 +80,7 @@ class Owner < ActiveRecord::Base
   end
 
   def completed_games
-    schools.map(&:games).flatten.select(&:is_over).sort_by do |game|
+    schools.map(&:games).flatten.uniq.select(&:is_over).sort_by do |game|
       game.start_time || Time.now
     end
   end
