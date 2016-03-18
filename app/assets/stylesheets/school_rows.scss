@@ -1,0 +1,40 @@
+.draft-results {
+  a {
+    font-weight: normal;
+  }
+  tr.alive {
+    font-weight: bold;
+    a {
+      font-weight: bold;
+    }
+  }
+  tr.no-wins {
+    background: #ccc;
+  }
+  tr.one-win {
+    background: #d9b3ff;
+  }
+  tr.sweet {
+    background: #99ccff;
+  }
+  tr.elite {
+    background: #9fdf9f;
+  }
+  tr.final-four {
+    background: #ffdf80;
+    font-size: 14px;
+  }
+  tr.title-gamer {
+    background: #ffb380;
+    font-size: 16px;
+  }
+  tr.champ {
+    font-size: 20px;
+  }
+}
+
+.draft-results-key {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+}

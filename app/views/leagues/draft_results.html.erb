@@ -4,7 +4,7 @@
 
   <h3 class="text-center">Draft Results</h3>
 
-  <table class="table table-responsive table-hover table-condensed">
+  <table class="draft-results table table-responsive table-hover table-condensed">
     <tr class="active">
       <th>Round</th>
       <th>Pick</th>
@@ -15,7 +15,7 @@
       <th>Total Points</th>
     </tr>
     <% @owner_schools.each do |os| %>
-      <tr class="<%= 'danger' unless os.school.alive? %>">
+      <tr class="<%= os.school.wins_count_class %> <%= os.school.alive? ? 'alive' : '' %>">
         <td><%= os.draft_round %></td>
         <td><%= os.draft_pick %></td>
         <td><%= link_to os.owner.team_name, league_owner_path(@league, os.owner) %></td>
@@ -26,4 +26,33 @@
       </tr>
     <% end %>
   </table>
+
+  </br>
+  <div class="draft-results-key">
+    <h4 class="text-center">Key</h4>
+    <table class="draft-results table table-responsive table-condensed">
+      <tr class="champ alive">
+        <td>2016 National Champion</td>
+      </tr>
+      <tr class="title-gamer alive">
+        <td>Finalist</td>
+      </tr>
+      <tr class="final-four alive">
+        <td>Final Four</td>
+      </tr>
+      <tr class="elite alive">
+        <td>Elite Eight</td>
+      </tr>
+      <tr class="sweet alive">
+        <td>Sweet Sixteen</td>
+      </tr>
+      <tr class="one-win alive">
+        <td>Round of 32</td>
+      </tr>
+      <tr class="no-wins">
+        <td>Thanks for coming</td>
+      </tr>
+    </table>
+    <p><strong>Still Alive</strong> Knocked Out</p>
+  </div>
 </div>

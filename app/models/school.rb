@@ -85,4 +85,30 @@ class School < ActiveRecord::Base
   def selected_in?(league)
     league_ids.include?(league.id)
   end
+
+  def wins_count
+    games_count = games.count
+    return games_count if games_count == 6 && won?(games.last)
+
+    games_count - 1
+  end
+
+  def wins_count_class
+    return case wins_count
+    when 0
+      'no-wins'
+    when 1
+      'one-win'
+    when 2
+      'sweet'
+    when 3
+      'elite'
+    when 4
+      'final-four'
+    when 5
+      'title-gamer'
+    else
+      'champ'
+    end
+  end
 end
