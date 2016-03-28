@@ -49,7 +49,7 @@ class School < ActiveRecord::Base
   def ppr
     return 0 unless alive?
 
-    next_game_round = games.any? ? (games.last.round + 1) : 0
+    next_game_round = games.any? ? (games.map(&:round).max) : 0
     remaining_rounds = (next_game_round..5).to_a
 
     remaining_rounds.map do |round|
