@@ -27,10 +27,12 @@ class GamesController < ApplicationController
       is_over: true
     )
 
-    if game.next_game.school1_id.nil?
-      game.next_game.update!(school1_id: winning_team_id)
-    else
-      game.next_game.update!(school2_id: winning_team_id)
+    if game.next_game
+      if game.next_game.school1_id
+        game.next_game.update!(school2_id: winning_team_id)
+      else
+        game.next_game.update!(school1_id: winning_team_id)
+      end
     end
 
     redirect_to admin_games_url

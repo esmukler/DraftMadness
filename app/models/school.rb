@@ -14,7 +14,7 @@ class School < ActiveRecord::Base
   def games
     @games = Rails.cache.fetch "school:#{id}:games", expires_in: 1.hour do
       Game.where("school1_id = ? OR school2_id = ?", id, id).
-           order(:start_time).to_a
+           order(:round).to_a
     end
   end
 
