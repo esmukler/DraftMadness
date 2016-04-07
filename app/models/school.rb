@@ -47,7 +47,7 @@ class School < ActiveRecord::Base
   end
 
   def ppr
-    return 0 unless alive?
+    return 0 unless alive? || champ?
 
     next_game_round = games.any? ? (games.map(&:round).max) : 0
     remaining_rounds = (next_game_round..5).to_a
@@ -86,9 +86,14 @@ class School < ActiveRecord::Base
     league_ids.include?(league.id)
   end
 
+  def champ?
+    winners = games.map(&:winning_team_id)
+    winners.count == 6 && winners.uniq.count == 1
+  end
+
   def wins_count
     games_count = games.count
-    return games_count if games_count == 6 && won?(games.last)
+    return games_count if champ?
 
     games_count - 1
   end
