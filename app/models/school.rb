@@ -11,6 +11,10 @@ class School < ActiveRecord::Base
     "#{name} #{mascot}"
   end
 
+  def full_name_and_seed
+    "No. #{seed.seed_number} #{full_name}"
+  end
+
   def games
     @games = Rails.cache.fetch "school:#{id}:games", expires_in: 1.hour do
       Game.where("school1_id = ? OR school2_id = ?", id, id).

@@ -1,23 +1,39 @@
 <%= render 'header', league: @league %>
 
-<% if true %>
+<main id="bracket">
 
-  <%= image_tag 'bracket-ncaa', class: 'img-responsive' %>
+  <% 6.times do |round_num| %>
 
-<% else %>
+    <% games = @games.where(round: round_num) %>
+    <ul class="round round-<%= round_num %>">
+      <li class="spacer">&nbsp;</li>
 
-  <div class="row">
-    <% @schools.each do |school| %>
-      <div class="col-md-2"><%= link_to school.name, school_path(school) %></div>
-    <% end %>
-  </div>
+      <% games.each do |game| %>
+        <li title="<%= game.id %>-top"
+            class="game game-top <%= 'winner' if game.winner?(game.school1) %>'">
+          <%= game.school1.try(:full_name_and_seed) %>
+          <span><%= game.school1_score %></span>
+        </li>
 
+        <li class="game game-spacer">&nbsp;</li>
 
+        <li title="<%= game.id %>-bottom"
+            class="game game-bottom <%= 'winner' if game.winner?(game.school2) %>'">
+          <%= game.school2.try(:full_name_and_seed) %>
+          <span><%= game.school2_score %></span>
+        </li>
+        <li class="spacer">&nbsp;</li>
+      <% end %>
+
+    </ul>
+  <% end %>
+</main>
+
+<% if false %>
   <div>TODO:</div>
   <ul>
     <li>Schedule of games</li>
     <li>Results of games</li>
     <li>Bonus: choose which owner you would like to reflect personalized results for</li>
   </ul>
-
 <% end %>

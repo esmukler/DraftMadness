@@ -1,3 +1,7 @@
 == README
 
 Draft Madness App
+
+To-Dos:
+- Use Devise Invitable
+- An updating bracket

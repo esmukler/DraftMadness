@@ -1,0 +1,53 @@
+main#bracket {
+  display:flex;
+  flex-direction:row;
+
+  .round {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    width:200px;
+    list-style:none;
+    padding:0;
+
+    .spacer {
+      flex-grow:1;
+
+      &:first-child,
+      &:last-child {
+        flex-grow:.5;
+      }
+    }
+
+    .game-spacer {
+      flex-grow:1;
+    }
+
+    li.game {
+      padding-left:20px;
+
+      &.winner {
+        font-weight:bold;
+      }
+
+      span {
+        float:right;
+        margin-right:5px;
+      }
+    }
+
+    li.game-top {
+      border-bottom:1px solid #aaa;
+    }
+
+    li.game-spacer {
+      border-right:1px solid #aaa;
+      min-height:40px;
+      background: inherit;
+    }
+
+    li.game-bottom {
+      border-top:1px solid #aaa;
+    }
+  }
+}

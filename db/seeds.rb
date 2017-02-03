@@ -23,40 +23,41 @@ CSV.foreach(filename, headers: true) do |row|
   )
 end
 
-# Create Games
-Seed.where("seed_number <= ?", 8).each do |seed|
-  school1 = seed.school
-  other_school_seed = Seed.find_by(
-    seed_number: (17 - seed.seed_number),
-    region: seed.region
-  )
-  school2 = other_school_seed.school
+BRACKET_SEED_ORDER = [1, 8, 5, 4, 6, 3, 7, 2]
+regions = Seed.pluck('distinct region')
 
-  Game.create!(
-    school1_id: school1.id,
-    school2_id: school2.id,
-    round: 0
-  )
+# Create 1st round games
+regions.each do |region|
+  BRACKET_SEED_ORDER.each do |seed_num|
+    seed = Seed.find_by(
+      seed_number: seed_num,
+      region: region
+    )
+    school1 = seed.school
+    school2 = Seed.find_by(
+      seed_number: (17 - seed_num),
+      region: seed.region
+    ).school
+
+    Game.create!(
+      school1_id: school1.id,
+      school2_id: school2.id,
+      round: 0
+    )
+  end
 end
 
-# TODO: Create other games
+5.times do |round_num|
+  games = Game.where(round: round_num)
 
-# 4.times do |index|
-#   # games = Game.where(round: index)
-#
-#   games.count.times do |idx|
-#     next unless idx % 2 == 0
-#     game = games[idx]
-#
-#     next_round_game = Game.create!(
-#       round: (game.round + 1)
-#     )
-#     game.update(next_game_id: next_round_game.id)
-#
-#     other_game = games[idx + 1]
-#     other_game.update(next_game_id: next_round_game.id)
-#   end
-# end
+  games.each_slice(2) do |game1, game2|
+    next_round_game = Game.create!(
+      round: (game1.round + 1)
+    )
+    game1.update(next_game_id: next_round_game.id)
+    game2.update(next_game_id: next_round_game.id)
+  end
+end
 
 # Create test League
 
@@ -66,7 +67,10 @@ league = League.create!(name: "Playa's Club", description: 'Where the Playas Pla
   user = User.create!(email: "test_#{idx}@example.com", password: 'secret_password')
   owner = user.owners.create!(team_name: "gobruins_#{idx}", motto: "I'm the No. #{idx} best player", league: league)
 
-  league.update(commissioner: user) if idx == 1
+  if idx == 1
+    league.update(commissioner: user)
+    user.update(is_admin: true)
+  end
 end
 
 puts "Seeds file complete"

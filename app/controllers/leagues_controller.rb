@@ -29,7 +29,7 @@ class LeaguesController < ApplicationController
   end
 
   def bracket
-    # @schools = School.all
+    @games = Game.all
   end
 
   def draft_room

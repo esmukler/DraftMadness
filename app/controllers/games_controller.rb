@@ -11,13 +11,8 @@ class GamesController < ApplicationController
     score1 = params[:game][:school1_score].to_i
     score2 = params[:game][:school2_score].to_i
 
-    if score1 > score2
-      winning_team_id = game.school1_id
-      losing_team_id = game.school2_id
-    else
-      winning_team_id = game.school2_id
-      losing_team_id = game.school1_id
-    end
+    winning_team_id = score1 > score2 ? game.school1_id : game.school2_id
+    losing_team_id = score1 > score2 ? game.school2_id : game.school1_id
 
     game.update!(
       school1_score: score1,

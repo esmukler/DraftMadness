@@ -37,10 +37,19 @@ class Game < ActiveRecord::Base
   end
 
   def schools
-    School.where(id: school_ids)
+    @schools ||= School.where(id: school_ids)
   end
 
   def started?
     Time.now > start_time
+  end
+
+  def winner?(school)
+    return unless school
+    winning_team_id == school.id
+  end
+
+  def winning_school
+    School.find_by(id: winning_team_id)
   end
 end
