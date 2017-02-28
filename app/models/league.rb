@@ -1,5 +1,6 @@
 class League < ActiveRecord::Base
   validates :name, presence: true
+  validate :not_too_many_owners
 
   belongs_to :commissioner, class_name: 'User'
   has_many :owners, dependent: :destroy
@@ -8,8 +9,10 @@ class League < ActiveRecord::Base
 
   attr_accessor :invite_emails
 
+  MAX_OWNERS = 8
+
   def full?
-    owners.count == 8
+    owners.count == MAX_OWNERS
   end
 
   def drafted?
@@ -29,5 +32,12 @@ class League < ActiveRecord::Base
       start + owner == league ||
       (start + 17) - owner == league
     end.any?
+  end
+
+  private
+
+  def not_too_many_owners
+    return unless owners.count > MAX_OWNERS
+    errors.add(:owners, 'Too many owners!')
   end
 end
