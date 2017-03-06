@@ -33,6 +33,9 @@ gem 'simple_form'
 # SMS messaging
 gem 'twilio-ruby'
 
+# run tasks
+gem 'thor'
+
 group :production do
   gem 'rails_12factor'
 

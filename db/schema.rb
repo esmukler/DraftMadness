@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170202202559) do
+ActiveRecord::Schema.define(version: 20170306014514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20170202202559) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "current_draft_pick", default: 1, null: false
+    t.integer  "year"
   end
 
   create_table "owner_schools", force: :cascade do |t|
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 20170202202559) do
     t.integer  "seed_id",                             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "year"
   end
 
   create_table "seeds", force: :cascade do |t|

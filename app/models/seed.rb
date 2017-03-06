@@ -1,6 +1,6 @@
 class Seed < ActiveRecord::Base
   validates :seed_number, :region, presence: true
-  has_one  :school
+  has_many :schools
 
   WINNING_POINTS = [
     # second round points at stake for each seed 1-16
@@ -18,6 +18,10 @@ class Seed < ActiveRecord::Base
     # total
     [86.49, 96.08, 101.76, 104.59, 112.10, 108.41, 111.34, 112.72, 120.25, 122.63, 120.47, 123.55175, 129.40, 130.34, 131.32, 138]
   ]
+
+  def school
+    @school ||= schools.find_by(year: Time.now.year)
+  end
 
   def self.points_for_winning(seed_number, round)
     WINNING_POINTS[round][seed_number - 1]

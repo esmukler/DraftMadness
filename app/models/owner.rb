@@ -13,6 +13,14 @@ class Owner < ActiveRecord::Base
 
   attr_accessor :league_password
 
+  def self.current
+    joins(:league).where('leagues.year = ?', Time.now.year)
+  end
+
+  def self.old
+    joins(:league).where('leagues.year < ?', Time.now.year)
+  end
+
   def total_points
     schools.map(&:total_points).sum.round(2)
   end

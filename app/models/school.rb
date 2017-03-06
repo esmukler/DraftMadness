@@ -1,10 +1,16 @@
 class School < ActiveRecord::Base
-  validates :name, :primary_color, :secondary_color, :seed, presence: true
+  validates :name, :primary_color, :secondary_color, :seed, :year, presence: true
 
   belongs_to :seed
   has_many :owner_schools
   has_many :owners, through: :owner_schools
   has_many :leagues, through: :owner_schools
+
+  before_create :set_year
+
+  def self.current
+    where(year: Time.now.year)
+  end
 
   def full_name
     return name unless mascot.present?
@@ -119,5 +125,11 @@ class School < ActiveRecord::Base
     else
       'champ'
     end
+  end
+
+  private
+
+  def set_year
+    self.year = Time.now.year
   end
 end

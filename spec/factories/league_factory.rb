@@ -3,6 +3,7 @@ FactoryGirl.define do
     name         'Best League Ever'
     description  'This league is so great!'
     password     'secret_password'
+    year         Time.now.year
     commissioner { create(:user) }
 
     after(:create) do |league, evaluator|
@@ -17,6 +18,10 @@ FactoryGirl.define do
           create(:owner, league: league)
         end
       end
+    end
+
+    trait :old do
+      year { Time.now.year - 1 }
     end
   end
 end

@@ -11,6 +11,18 @@ class League < ActiveRecord::Base
 
   MAX_OWNERS = 8
 
+  def self.current
+    where(year: Time.now.year)
+  end
+
+  def self.old
+    where('year < ?', Time.now.year)
+  end
+
+  def current?
+    year == Time.now.year
+  end
+
   def full?
     owners.count == MAX_OWNERS
   end

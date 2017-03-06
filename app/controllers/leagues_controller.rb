@@ -29,6 +29,7 @@ class LeaguesController < ApplicationController
   end
 
   def bracket
+    # Just show games from this league's tournament
     @games = Game.all
   end
 
@@ -70,6 +71,8 @@ class LeaguesController < ApplicationController
   end
 
   def league_params
-    params.require(:league).permit(:name, :description, :commissioner_id, :password)
+    params.
+      require(:league).permit(:name, :description, :commissioner_id, :password).
+      merge(year: Time.now.year)
   end
 end

@@ -25,6 +25,10 @@
    background: transparent;
 }
 
+em {
+  font-style: italic;
+}
+
 .group:after {
   content: '';
   display: block;

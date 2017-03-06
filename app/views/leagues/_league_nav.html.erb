@@ -11,7 +11,7 @@
     <%= link_to 'Bracket', league_bracket_path(league) %>
   </li>
 
-  <% unless league.drafted? %>
+  <% if league.current? && !league.drafted? %>
     <li class="<%= action_name == 'draft_room' ? 'active' : '' %>">
       <%= link_to 'Draft Room', league_draft_room_path(league) %>
     </li>

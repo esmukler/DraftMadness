@@ -19,4 +19,22 @@ RSpec.describe LeaguesController do
       expect(assigns(:leagues)).to_not include(full_league)
     end
   end
+
+  describe '#create' do
+    let(:valid_league_params) do
+      {
+        name: 'Great League',
+        description: 'This league is going to be so great',
+        commissioner_id: user.id,
+        password: 'make_march_great_again'
+      }
+    end
+
+    it 'creates a valid league' do
+      expect { post :create, league: valid_league_params }.
+        to change { League.count }.by(1)
+
+      expect(League.last.year).to eq Time.now.year
+    end
+  end
 end

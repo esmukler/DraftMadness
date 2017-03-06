@@ -1,8 +1,8 @@
 <h4><%= @user.email %></h4>
 </br>
 
-<% if @user.leagues.any? %>
-  <h3>Your Leagues</h3>
+<% if @user.leagues.current.any? %>
+  <h3>Your Current Leagues</h3>
 
   <table class="table table table-hover">
     <tr>
@@ -11,7 +11,7 @@
       <th>Current Points</th>
       <th>Current Ranking</th>
     </tr>
-    <% @user.owners.each do |owner| %>
+    <% @user.owners.current.each do |owner| %>
       <tr>
         <td><%= link_to owner.league.name, league_leaderboard_path(owner.league) %></td>
         <td><%= link_to owner.team_name, league_owner_path(owner.league, owner) %></td>
@@ -22,7 +22,29 @@
   </table>
 
 <% else %>
-  <p>You have not joined any leagues yet! Choose one of the options below to get started:</p>
+  <p>You have not joined any leagues yet this year! Choose one of the options below to get started:</p>
+<% end %>
+</br>
+
+<% if @user.leagues.old.any? %>
+  <h3>Your Old Leagues</h3>
+
+  <table class="table table table-hover">
+    <tr>
+      <th>League Name</th>
+      <th>Owner Name</th>
+      <th>Points</th>
+      <th>Ranking</th>
+    </tr>
+    <% @user.owners.old.each do |owner| %>
+      <tr>
+        <td><%= link_to owner.league.name, league_leaderboard_path(owner.league) %></td>
+        <td><%= link_to owner.team_name, league_owner_path(owner.league, owner) %></td>
+        <td><%= owner.total_points %></td>
+        <td><%= owner.current_ranking.presence || '-' %></td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
 
 <%= link_to 'Create a League', new_league_path, class: 'btn btn-primary' %>

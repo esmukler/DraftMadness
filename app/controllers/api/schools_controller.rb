@@ -5,7 +5,9 @@ class Api::SchoolsController < ApplicationController
 
     @league = @owner.league
 
-    @schools = School.all.includes(:seed, :owners, :leagues).sort_by do |school|
+    @schools = School.where(year: @league.year).
+                      includes(:seed, :owners, :leagues).
+                      sort_by do |school|
       [school.seed_number, school.region]
     end
   end
