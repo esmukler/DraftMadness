@@ -57,4 +57,13 @@ class Game < ActiveRecord::Base
   def winning_school
     School.find_by(id: winning_team_id)
   end
+
+  def year
+    start_time.try(:year) || schools.first.year
+  end
+
+  def other_previous_game
+    return unless next_game
+    next_game.previous_games.find { |game| game != self }
+  end
 end

@@ -25,14 +25,14 @@ class GamesController < ApplicationController
     )
 
     if game.next_game
-      if game.next_game.school1_id
-        game.next_game.update!(school2_id: winning_team_id)
-      else
+      if game.id < game.other_preivous_game.id
         game.next_game.update!(school1_id: winning_team_id)
+      else
+        game.next_game.update!(school2_id: winning_team_id)
       end
     end
 
-    redirect_to admin_games_url
+    redirect_to admin_games_url(year: game.year)
   end
 
   def update_time
@@ -42,7 +42,7 @@ class GamesController < ApplicationController
       start_time('month'),
       start_time('date'),
       start_time('hour'),
-      start_time('day')
+      start_time('min')
     )
     unless game.update(start_time: new_time)
       flash[:errors] = game.errors.full_messages.join('; ')

@@ -19,6 +19,12 @@ class Seed < ActiveRecord::Base
     [86.49, 96.08, 101.76, 104.59, 112.10, 108.41, 111.34, 112.72, 120.25, 122.63, 120.47, 123.55175, 129.40, 130.34, 131.32, 138]
   ]
 
+  BRACKET_ORDER = [1, 8, 5, 4, 6, 3, 7, 2]
+
+  def self.regions
+    pluck('DISTINCT region')
+  end
+
   def school
     @school ||= schools.find_by(year: Time.now.year)
   end

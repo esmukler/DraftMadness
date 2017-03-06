@@ -30,7 +30,7 @@ class LeaguesController < ApplicationController
 
   def bracket
     # Just show games from this league's tournament
-    @games = Game.all
+    @games = Game.from_year(@league.year)
   end
 
   def draft_room

@@ -23,12 +23,11 @@ CSV.foreach(filename, headers: true) do |row|
   )
 end
 
-BRACKET_SEED_ORDER = [1, 8, 5, 4, 6, 3, 7, 2]
 regions = Seed.pluck('distinct region')
 
 # Create 1st round games
 regions.each do |region|
-  BRACKET_SEED_ORDER.each do |seed_num|
+  Seed::BRACKET_ORDER.each do |seed_num|
     seed = Seed.find_by(
       seed_number: seed_num,
       region: region

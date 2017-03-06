@@ -2,31 +2,23 @@
 
 <main id="bracket">
   <% if @league.current? %>
-    <% 6.times do |round_num| %>
+    <% current_round_games = @games.where(round: 0).order(:id) %>
 
-      <% games = @games.where(round: round_num) %>
+    <% 6.times do |round_num| %>
+      <% next_round_games = [] %>
+
       <ul class="round round-<%= round_num %>">
         <li class="spacer">&nbsp;</li>
 
-        <% games.each do |game| %>
-          <li title="<%= game.id %>-top"
-              class="game game-top <%= 'winner' if game.winner?(game.school1) %>'">
-            <%= game.school1.try(:full_name_and_seed) %>
-            <span><%= game.school1_score %></span>
-          </li>
-
-          <li class="game game-spacer">&nbsp;</li>
-
-          <li title="<%= game.id %>-bottom"
-              class="game game-bottom <%= 'winner' if game.winner?(game.school2) %>'">
-            <%= game.school2.try(:full_name_and_seed) %>
-            <span><%= game.school2_score %></span>
-          </li>
-          <li class="spacer">&nbsp;</li>
+        <% current_round_games.each_with_index do |game, idx| %>
+          <%= render 'bracket_game', game: game %>
+          <% next_round_games << game.next_game if idx.odd? && game.next_game %>
         <% end %>
 
+        <% current_round_games = next_round_games %>
       </ul>
     <% end %>
+
   <% elsif @league.year == 2016 %>
     <%= image_tag '2016-bracket-ncaa', id: 'bracket-2016' %>
   <% end %>
