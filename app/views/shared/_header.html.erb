@@ -18,6 +18,11 @@
         <li>
           <%= link_to 'Contact', contact_path %>
         </li>
+        <% if current_user.admin? %>
+          <li>
+            <%= link_to 'Update Games', admin_games_path %>
+          </li>
+        <% end %>
       </ul>
 
       <% if user_signed_in? %>

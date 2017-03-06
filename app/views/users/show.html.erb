@@ -24,6 +24,8 @@
 <% else %>
   <p>You have not joined any leagues yet this year! Choose one of the options below to get started:</p>
 <% end %>
+<%= link_to 'Create a League', new_league_path, class: 'btn btn-primary' %>
+<%= link_to 'Join a League', leagues_path, class: 'btn btn-primary' %>
 </br>
 
 <% if @user.leagues.old.any? %>
@@ -46,6 +48,3 @@
     <% end %>
   </table>
 <% end %>
-
-<%= link_to 'Create a League', new_league_path, class: 'btn btn-primary' %>
-<%= link_to 'Join a League', leagues_path, class: 'btn btn-primary' %>

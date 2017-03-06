@@ -1,5 +1,8 @@
 <% cache(@school, expires_in: 1.hour) do %>
-  <h2 class="school-header"><%= @school.full_name %></h2>
+  <h2 class="school-header">
+    <%= @school.full_name %>
+    <%= " (#{@school.year})" if @school.year != Time.now.year %>
+  </h2>
 
   <% if @pending_games.any? %>
     <div class="row">

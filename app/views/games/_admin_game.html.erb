@@ -4,6 +4,14 @@
       <%= game.start_time.strftime('%b. %-d, %l:%M%P') %>
     <% else %>
       Start Time TBD
+      <%= simple_form_for game, url: game_update_time_url(game), method: 'PATCH' do |f| %>
+        <%= f.input :start_time,
+                    as: :datetime,
+                    year: game.schools.first.year,
+                    discard_year: true %>
+        </br>
+        <%= f.button :submit, 'Update Start Time', class: 'btn btn-primary' %>
+      <% end %>
   <% end %>
   </div>
   <%= simple_form_for game, url: game_url(game), method: 'PATCH' do |f| %>

@@ -2,8 +2,10 @@ class GamesController < ApplicationController
   before_action :is_admin, only: :admin_games
 
   def admin_games
-    @pending_games = Game.pending_games
-    @completed_games = Game.completed_games
+    get_years
+    @current_year = (params[:year] || Time.now.year).to_i
+    @pending_games = Game.pending_games.from_year(@current_year)
+    @completed_games = Game.completed_games.from_year(@current_year)
   end
 
   def update
@@ -33,11 +35,50 @@ class GamesController < ApplicationController
     redirect_to admin_games_url
   end
 
+  def update_time
+    game = Game.find(params[:game_id])
+    new_time = Time.local(
+      game.schools.first.year,
+      start_time('month'),
+      start_time('date'),
+      start_time('hour'),
+      start_time('day')
+    )
+    unless game.update(start_time: new_time)
+      flash[:errors] = game.errors.full_messages.join('; ')
+    end
+
+    redirect_to admin_games_url
+  end
+
   private
 
   def is_admin
     unless current_user.admin?
       raise ActionController::RoutingError.new('Not Found')
     end
+  end
+
+  # parse the datetime form
+  def start_time(part)
+    idx = case part
+          when 'month'
+            2
+          when 'date'
+            3
+          when 'hour'
+            4
+          when 'min'
+            5
+          else
+            return nil
+          end
+
+    params[:game]["start_time(#{idx}i)"]
+  end
+
+  def get_years
+    @years = School.order(year: :desc).pluck('DISTINCT year')
+    @years.unshift(Time.now.year) unless @years.include? Time.now.year
   end
 end

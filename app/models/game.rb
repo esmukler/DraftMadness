@@ -12,6 +12,11 @@ class Game < ActiveRecord::Base
     'Elite 8', 'Final 4', 'Title Game'
   ]
 
+  def self.from_year(year)
+    allow_null_sql = "start_time IS NULL OR " if Time.now.year == year
+    where("#{allow_null_sql}EXTRACT(YEAR FROM start_time) = #{year}")
+  end
+
   def self.current_games
     where(is_over: false).
     where('start_time < ?', Time.zone.now)

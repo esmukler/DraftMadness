@@ -1,3 +1,11 @@
+<ul id="centered-nav" class="nav-tabs nav nav-justified">
+  <% @years.each do |year| %>
+    <li class="<%= 'active' if year == @current_year %>">
+      <%= link_to year, admin_games_path(year: year) %>
+    </li>
+  <% end %>
+</ul>
+
 <div class="row">
   <h4 class="game-header">
     Pending Games:

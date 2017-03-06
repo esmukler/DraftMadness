@@ -52,7 +52,6 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    admin_id = Rails.env.production? ? 9 : 1
-    id == admin_id
+    is_admin
   end
 end

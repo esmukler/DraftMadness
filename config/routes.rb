@@ -32,8 +32,10 @@ Rails.application.routes.draw do
     resources :owners
   end
 
-  resources :games, only: :update
-  get '/admin_games' => 'games#admin_games'
+  resources :games, only: :update do
+    patch :update_time
+  end
+  get '/admin_games' => 'games#admin_games', as: :admin_games
 
   resources :owner_schools, only: %i(create destroy)
 
