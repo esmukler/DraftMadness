@@ -25,7 +25,7 @@ class GamesController < ApplicationController
     )
 
     if game.next_game
-      if game.id < game.other_preivous_game.id
+      if game.id < game.other_previous_game.id
         game.next_game.update!(school1_id: winning_team_id)
       else
         game.next_game.update!(school2_id: winning_team_id)
