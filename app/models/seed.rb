@@ -21,10 +21,6 @@ class Seed < ActiveRecord::Base
 
   BRACKET_ORDER = [1, 8, 5, 4, 6, 3, 7, 2]
 
-  def self.regions
-    pluck('DISTINCT region')
-  end
-
   def school
     @school ||= schools.find_by(year: Time.now.year)
   end

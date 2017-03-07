@@ -1,6 +1,8 @@
 <li title="<%= game.id %>-top"
     class="game game-top <%= 'winner' if game.winner?(game.school1) %>">
-  <%= link_to game.school1.try(:full_name_and_seed), school_url(game.school1) %>
+  <% if game.school1 %>
+    <%= link_to game.school1.try(:full_name_and_seed), school_url(game.school1_id) %>
+  <% end %>
   <span><%= game.school1_score %></span>
 </li>
 
@@ -8,7 +10,9 @@
 
 <li title="<%= game.id %>-bottom"
     class="game game-bottom <%= 'winner' if game.winner?(game.school2) %>'">
-  <%= game.school2.try(:full_name_and_seed) %>
+  <% if game.school2 %>
+    <%= link_to game.school2.try(:full_name_and_seed), school_url(game.school2_id) %>
+  <% end %>
   <span><%= game.school2_score %></span>
 </li>
 <li class="spacer">&nbsp;</li>

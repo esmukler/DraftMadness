@@ -6,7 +6,7 @@ class School < ActiveRecord::Base
   has_many :owners, through: :owner_schools
   has_many :leagues, through: :owner_schools
 
-  before_create :set_year
+  after_initialize :set_year
 
   def self.current
     where(year: Time.now.year)

@@ -7,6 +7,8 @@ class Game < ActiveRecord::Base
   belongs_to :next_game, class_name: 'Game'
   has_many :previous_games, class_name: 'Game', foreign_key: 'next_game_id'
 
+  after_initialize :set_default_start_time
+
   ROUND_NAMES = [
     'Round of 64', 'Round of 32', 'Sweet 16',
     'Elite 8', 'Final 4', 'Title Game'
@@ -38,7 +40,7 @@ class Game < ActiveRecord::Base
   end
 
   def school_ids
-    [school1.id, school2.id]
+    [school1_id, school2_id].compact
   end
 
   def schools
@@ -65,5 +67,12 @@ class Game < ActiveRecord::Base
   def other_previous_game
     return unless next_game
     next_game.previous_games.find { |game| game != self }
+  end
+
+  private
+
+  def set_default_start_time
+    # set arbitrary late start_time until official starts are announced
+    self.start_time = Time.local(Time.now.year, 4, 30)
   end
 end

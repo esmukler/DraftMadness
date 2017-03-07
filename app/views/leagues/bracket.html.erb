@@ -1,7 +1,7 @@
 <%= render 'header', league: @league %>
 
 <main id="bracket">
-  <% if @league.current? %>
+  <% if @games.any? { |game| game.is_over } && @league.current? %>
     <% current_round_games = @games.where(round: 0).order(:id) %>
 
     <% 6.times do |round_num| %>
@@ -21,14 +21,9 @@
 
   <% elsif @league.year == 2016 %>
     <%= image_tag '2016-bracket-ncaa', id: 'bracket-2016' %>
+  <% else %>
+    <h4 class="text-center">
+      The bracket will be posted here shortly after it has been released. Check back soon!
+    </h4>
   <% end %>
 </main>
-
-<% if false %>
-  <div>TODO:</div>
-  <ul>
-    <li>Schedule of games</li>
-    <li>Results of games</li>
-    <li>Bonus: choose which owner you would like to reflect personalized results for</li>
-  </ul>
-<% end %>
