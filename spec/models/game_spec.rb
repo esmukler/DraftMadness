@@ -4,7 +4,7 @@ RSpec.describe Game do
   let!(:game) { FactoryGirl.create(:game) }
   let!(:old_game) do
     FactoryGirl.create(:game,
-                       start_time: nil,
+                       start_time: 1.year.ago,
                        school1: old_schools.first,
                        school2: old_schools.last)
   end
