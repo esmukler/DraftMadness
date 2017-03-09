@@ -72,7 +72,6 @@ class LeaguesController < ApplicationController
 
   def league_params
     params.
-      require(:league).permit(:name, :description, :commissioner_id, :password).
-      merge(year: Time.now.year)
+      require(:league).permit(:name, :description, :commissioner_id, :password)
   end
 end

@@ -12,6 +12,10 @@ class School < ActiveRecord::Base
     where(year: Time.now.year)
   end
 
+  def self.bracket_announced?(year)
+    where(year: year).count >= 64
+  end
+
   def full_name
     return name unless mascot.present?
     "#{name} #{mascot}"

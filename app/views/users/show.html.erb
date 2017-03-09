@@ -13,7 +13,19 @@
     </tr>
     <% @user.owners.current.each do |owner| %>
       <tr>
-        <td><%= link_to owner.league.name, league_leaderboard_path(owner.league) %></td>
+        <td>
+          <%= link_to owner.league.name, league_leaderboard_path(owner.league) %>
+          <% if owner.league.drafting? %>
+            <%= link_to league_draft_room_path(owner.league) do %>
+              <strong><code>
+                Drafting!
+                <% if owner.current_turn? %>
+                  AND IT'S YOUR TURN!
+                <% end %>
+              </code></strong>
+            <% end %>
+          <% end %>
+        </td>
         <td><%= link_to owner.team_name, league_owner_path(owner.league, owner) %></td>
         <td><%= owner.total_points %></td>
         <td><%= owner.current_ranking.presence || '-' %></td>

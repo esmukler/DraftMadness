@@ -1,9 +1,9 @@
-class Teams < Thor
+class Schools < Thor
   require './config/environment.rb'
   require 'csv'
 
   desc 'import_teams', 'Import teams/mascots/seeds by CSV'
-  def import_teams(file)
+  def import_schools(file)
     raise "Can't find csv input. Please specify valid FILE." unless File.exist?(file)
 
     ActiveRecord::Base.transaction do
