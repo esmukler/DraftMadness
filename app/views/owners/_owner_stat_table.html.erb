@@ -43,10 +43,12 @@
 
   <% if current_user.id == owner.user_id && schools.empty? %>
     <p>You haven't selected any schools yet.</p>
-    <p>
-      Go to the
-      <%= link_to 'Draft Room', league_draft_room_path(league) %>
-      to add some schools to your squad!
-    </p>
+    <%= if league.drafting? %>
+      <p>
+        Go to the
+        <%= link_to 'Draft Room', league_draft_room_path(league) %>
+        to add some schools to your squad!
+      </p>
+    <% end %>
   <% end %>
 </div>
