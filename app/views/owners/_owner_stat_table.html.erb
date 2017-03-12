@@ -43,7 +43,7 @@
 
   <% if current_user.id == owner.user_id && schools.empty? %>
     <p>You haven't selected any schools yet.</p>
-    <%= if league.drafting? %>
+    <% if league.drafting? %>
       <p>
         Go to the
         <%= link_to 'Draft Room', league_draft_room_path(league) %>
