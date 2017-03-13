@@ -73,6 +73,6 @@ class Game < ActiveRecord::Base
 
   def set_default_start_time
     # set arbitrary late start_time until official starts are announced
-    self.start_time = Time.local(Time.now.year, 4, 30)
+    self.start_time = Time.local(Time.now.year, 4, 30) unless self.start_time
   end
 end
