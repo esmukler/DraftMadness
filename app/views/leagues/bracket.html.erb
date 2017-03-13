@@ -1,7 +1,7 @@
 <%= render 'header', league: @league %>
 
 <main id="bracket">
-  <% if @games.any? { |game| game.is_over } && @league.current? %>
+  <% if School.bracket_announced?(Time.now.year) && @league.current? %>
     <% current_round_games = @games.where(round: 0).order(:id) %>
 
     <% 6.times do |round_num| %>

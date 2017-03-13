@@ -2,7 +2,7 @@ class Schools < Thor
   require './config/environment.rb'
   require 'csv'
 
-  desc 'import_teams', 'Import teams/mascots/seeds by CSV'
+  desc 'import_schools', 'Import teams/mascots/seeds by CSV'
   def import_schools(file)
     raise "Can't find csv input. Please specify valid FILE." unless File.exist?(file)
 
@@ -20,9 +20,9 @@ class Schools < Thor
 
         seed = Seed.find_by(
           seed_number: seed,
-          region: region,
-          play_in_game: play_in_game
+          region: region
         )
+        seed.update(play_in_game: play_in_game) if seed.play_in_game != play_in_game
 
         school = School.create!(
           name: name,
