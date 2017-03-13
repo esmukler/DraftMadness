@@ -1,24 +1,26 @@
-<div class="row">
+<% cache expires_in: 6.hours do %>
+  <div class="row">
 
-  <h3>Possible Points</h3>
-  <h4>The amount of points a team of each seed could win in each round</h4>
+    <h3>Possible Points</h3>
+    <h4>The amount of points a team of each seed could win in each round</h4>
 
-  <table class="table table-responsive table-hover table-condensed">
-    <tr class="active">
-      <th>Seed</th>
-      <% 6.times do |round| %>
-        <th><%= Game::ROUND_NAMES[round] %></th>
-      <% end %>
-      <th>Max</th>
-    </tr>
-    <% (1..16).to_a.each do |seed_number| %>
-      <tr>
-        <th><%= seed_number %></th>
+    <table class="table table-responsive table-hover table-condensed">
+      <tr class="active">
+        <th>Seed</th>
         <% 6.times do |round| %>
-          <td><%= Seed.points_for_winning(seed_number, round) %></td>
+          <th><%= Game::ROUND_NAMES[round] %></th>
         <% end %>
-        <td><%= Seed.points_for_winning_it_all(seed_number) %></td>
+        <th>Max</th>
       </tr>
-    <% end %>
-  </table>
-</div>
+      <% (1..16).to_a.each do |seed_number| %>
+        <tr>
+          <th><%= seed_number %></th>
+          <% 6.times do |round| %>
+            <td><%= Seed.points_for_winning(seed_number, round) %></td>
+          <% end %>
+          <td><%= Seed.points_for_winning_it_all(seed_number) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>
