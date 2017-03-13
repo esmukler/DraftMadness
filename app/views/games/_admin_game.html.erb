@@ -1,17 +1,13 @@
 <div class="game col-md-3">
   <p><strong><%= game.round_name %></strong></p>
   <div class="start-time">
-    <% if game.start_time %>
-      <%= game.start_time.strftime('%b. %-d, %l:%M%P') %>
-    <% else %>
-      <%= simple_form_for game, url: game_update_time_url(game), method: 'PATCH' do |f| %>
-        <%= f.input :start_time,
-                    as: :datetime,
-                    year: game.schools.first.year,
-                    discard_year: true %>
-        </br>
-        <%= f.button :submit, 'Update Start Time', class: 'btn btn-primary' %>
-      <% end %>
+    <%= simple_form_for game, url: game_update_time_url(game), method: 'PATCH' do |f| %>
+      <%= f.input :start_time,
+                  as: :datetime,
+                  year: game.schools.first.year,
+                  discard_year: true %>
+      </br>
+      <%= f.button :submit, 'Update Start Time', class: 'btn btn-primary' %>
   <% end %>
   </div>
   <%= simple_form_for game, url: game_url(game), method: 'PATCH' do |f| %>
