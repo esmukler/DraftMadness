@@ -37,7 +37,7 @@ class GamesController < ApplicationController
 
   def update_time
     game = Game.find(params[:game_id])
-    new_time = Time.local(
+    new_time = Time.zone.local(
       game.schools.first.year,
       start_time('month'),
       start_time('date'),
