@@ -32,8 +32,8 @@ class School < ActiveRecord::Base
     end
   end
 
-  def self.left_alive_count
-    all.select(&:alive?).count
+  def self.left_alive_count(year)
+    where(year: year).select(&:alive?).count
   end
 
   def alive?
