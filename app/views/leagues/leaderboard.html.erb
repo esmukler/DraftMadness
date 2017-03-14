@@ -20,7 +20,9 @@
         <tr>
           <th><%= idx + 1 %></th>
           <!-- <th><%= owner.has_paid %></th> -->
-          <th><%= link_to owner.team_name, league_owner_path(@league, owner) %></th>
+          <th title="<%= owner.user.email %>">
+            <%= link_to owner.team_name, league_owner_path(@league, owner) %>
+          </th>
           <td><%= owner.schools_left_count %></td>
           <% 6.times do |round| %>
             <td><%= owner.score_for_round(round) %></td>

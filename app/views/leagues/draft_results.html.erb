@@ -18,7 +18,7 @@
       <tr class="<%= os.school.wins_count_class %> <%= os.school.alive? ? 'alive' : '' %>">
         <td><%= os.draft_round %></td>
         <td><%= os.draft_pick %></td>
-        <td><%= link_to os.owner.team_name, league_owner_path(@league, os.owner) %></td>
+        <td title="<%= os.owner.user.email %>"><%= link_to os.owner.team_name, league_owner_path(@league, os.owner) %></td>
         <td><%= link_to os.school.full_name, school_path(os.school) %></td>
         <td><%= os.school.seed_number %></td>
         <td><%= os.school.region %></td>
