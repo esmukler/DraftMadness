@@ -21,9 +21,7 @@
     <%= link_to 'Points Board', league_points_board_path(league) %>
   </li>
 
-  <% if league.drafted? %>
-    <li class="<%= action_name == 'draft_results' ? 'active' : '' %>">
-      <%= link_to 'Draft Results', league_draft_results_path(league) %>
-    </li>
-  <% end %>
+  <li class="<%= action_name == 'draft_results' ? 'active' : '' %>">
+    <%= link_to 'Draft Results', league_draft_results_path(league) %>
+  </li>
 </ul>
