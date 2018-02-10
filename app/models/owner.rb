@@ -1,4 +1,4 @@
-class Owner < ActiveRecord::Base
+class Owner < ApplicationRecord
   include Comparable
 
   belongs_to :user

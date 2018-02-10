@@ -1,4 +1,4 @@
-class Seed < ActiveRecord::Base
+class Seed < ApplicationRecord
   validates :seed_number, :region, presence: true
   has_many :schools
 

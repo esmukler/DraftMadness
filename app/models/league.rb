@@ -1,4 +1,4 @@
-class League < ActiveRecord::Base
+class League < ApplicationRecord
   validates :name, presence: true
   validate :not_too_many_owners
 

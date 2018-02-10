@@ -1,4 +1,4 @@
-class School < ActiveRecord::Base
+class School < ApplicationRecord
   validates :name, :primary_color, :secondary_color, :seed, :year, presence: true
 
   belongs_to :seed

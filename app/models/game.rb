@@ -1,4 +1,4 @@
-class Game < ActiveRecord::Base
+class Game < ApplicationRecord
   validates :round, presence: true
 
   belongs_to :school1, class_name: 'School'

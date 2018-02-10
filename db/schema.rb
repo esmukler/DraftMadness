@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -29,10 +28,9 @@ ActiveRecord::Schema.define(version: 20170306014514) do
     t.datetime "updated_at"
     t.integer  "school1_score"
     t.integer  "school2_score"
+    t.index ["school1_id"], name: "index_games_on_school1_id", using: :btree
+    t.index ["school2_id"], name: "index_games_on_school2_id", using: :btree
   end
-
-  add_index "games", ["school1_id"], name: "index_games_on_school1_id", using: :btree
-  add_index "games", ["school2_id"], name: "index_games_on_school2_id", using: :btree
 
   create_table "leagues", force: :cascade do |t|
     t.string   "name",                           null: false
@@ -52,12 +50,11 @@ ActiveRecord::Schema.define(version: 20170306014514) do
     t.datetime "updated_at"
     t.integer  "draft_pick", null: false
     t.integer  "league_id",  null: false
+    t.index ["owner_id"], name: "index_owner_schools_on_owner_id", using: :btree
+    t.index ["school_id", "league_id"], name: "index_owner_schools_on_school_id_and_league_id", using: :btree
+    t.index ["school_id", "owner_id"], name: "index_owner_schools_on_school_id_and_owner_id", using: :btree
+    t.index ["school_id"], name: "index_owner_schools_on_school_id", using: :btree
   end
-
-  add_index "owner_schools", ["owner_id"], name: "index_owner_schools_on_owner_id", using: :btree
-  add_index "owner_schools", ["school_id", "league_id"], name: "index_owner_schools_on_school_id_and_league_id", using: :btree
-  add_index "owner_schools", ["school_id", "owner_id"], name: "index_owner_schools_on_school_id_and_owner_id", using: :btree
-  add_index "owner_schools", ["school_id"], name: "index_owner_schools_on_school_id", using: :btree
 
   create_table "owners", force: :cascade do |t|
     t.integer  "user_id",                    null: false
@@ -107,10 +104,9 @@ ActiveRecord::Schema.define(version: 20170306014514) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.boolean  "is_admin",               default: false, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

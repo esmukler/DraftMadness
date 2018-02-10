@@ -1,4 +1,4 @@
-class OwnerSchool < ActiveRecord::Base
+class OwnerSchool < ApplicationRecord
   belongs_to :school
   belongs_to :owner
   belongs_to :league

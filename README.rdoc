@@ -5,3 +5,6 @@ Draft Madness App
 To-Dos:
 - Use Devise Invitable
 - An updating bracket
+- other owner selector on the My Squad page
+- owner link on school team page
+- unbold losing team names in the Draft Results page

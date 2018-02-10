@@ -2,10 +2,10 @@ source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0'
+gem 'rails', '~> 5.0'
 gem 'pg'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -18,8 +18,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # authentication
-gem 'devise', '~> 3.4.0'
-gem 'devise_invitable', '~> 1.5.2'
+gem 'devise', '~> 4.4.1'
+gem 'devise_invitable'
 
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
@@ -54,7 +54,6 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry-rails'
-  gem 'quiet_assets'
   gem 'awesome_print'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
