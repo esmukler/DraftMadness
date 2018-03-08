@@ -23,7 +23,7 @@ gem 'devise_invitable'
 
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '~> 4.0'
 
 gem 'react-rails', '~> 1.6.0'
 gem 'browserify-rails'
