@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   get '/rules', to: 'static_pages#rules'
   get '/contact', to: 'static_pages#contact'
+  get '/privacy', to: 'static_pages#privacy'
 
   resources :users, only: :show
 
