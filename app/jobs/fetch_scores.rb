@@ -30,7 +30,7 @@ class FetchScores < ApplicationJob
 
   def find_school(team_div)
     slug = find_team_slug(team_div)
-    School.find_by slug: slug
+    School.find_using_slug(slug)
   end
 
   def find_team_slug(team_div)
