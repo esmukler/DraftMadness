@@ -36,6 +36,8 @@ gem 'twilio-ruby'
 # run tasks
 gem 'thor'
 
+gem 'rest-client'
+
 group :production do
   gem 'rails_12factor'
 

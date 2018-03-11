@@ -8,12 +8,13 @@ RSpec.describe Game do
                        school1: old_schools.first,
                        school2: old_schools.last)
   end
+  let(:other_school) { FactoryGirl.create(:school) }
   let(:old_schools) do
     [FactoryGirl.create(:school, :old),
      FactoryGirl.create(:school, :old, :florida)]
   end
 
-  describe 'self.from_year' do
+  describe '::from_year' do
     it 'returns only current games if current year used' do
       expect(Game.from_year(Time.now.year)).to eq [game]
     end
