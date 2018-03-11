@@ -6,7 +6,9 @@
     <table class="table table-responsive table-hover table-condensed">
       <tr class="active">
         <th>Ranking</th>
-        <!-- <th>Has Paid?</th> -->
+        <% if @league.show_has_paid? %>
+          <th>Paid?</th>
+        <% end %>
         <th>Owner Name</th>
         <th>Schools Left</th>
         <% 6.times do |round| %>
@@ -19,7 +21,13 @@
       <% @owners.each_with_index do |owner, idx| %>
         <tr>
           <th><%= idx + 1 %></th>
-          <!-- <th><%= owner.has_paid %></th> -->
+          <% if @league.show_has_paid? %>
+            <th>
+              <% if owner.has_paid %>
+                <i class="fas fa-dollar-sign"></i>
+              <% end %>
+            </th>
+          <% end %>
           <th title="<%= owner.user.email %>">
             <%= link_to owner.team_name, league_owner_path(@league, owner) %>
           </th>

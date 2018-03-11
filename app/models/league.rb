@@ -55,6 +55,10 @@ class League < ApplicationRecord
     end.any?
   end
 
+  def show_has_paid?
+    owners.any?(&:has_paid)
+  end
+
   private
 
   def not_too_many_owners
