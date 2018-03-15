@@ -46,6 +46,7 @@
   <table class="table table table-hover">
     <tr>
       <th>League Name</th>
+      <th>Year<th>
       <th>Owner Name</th>
       <th>Points</th>
       <th>Ranking</th>
@@ -53,6 +54,7 @@
     <% @user.owners.old.each do |owner| %>
       <tr>
         <td><%= link_to owner.league.name, league_leaderboard_path(owner.league) %></td>
+        <td><%= owner.league.year %></td>
         <td><%= link_to owner.team_name, league_owner_path(owner.league, owner) %></td>
         <td><%= owner.total_points %></td>
         <td><%= owner.current_ranking.presence || '-' %></td>

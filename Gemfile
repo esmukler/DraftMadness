@@ -18,7 +18,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # authentication
-gem 'devise', '~> 4.4.1'
+gem 'devise', '~> 4.1.0'
 gem 'devise_invitable'
 
 gem 'omniauth'
@@ -71,4 +71,5 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
 end

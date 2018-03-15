@@ -7,7 +7,7 @@
                   year: game.schools.first.year,
                   discard_year: true %>
       </br>
-      <%= f.button :submit, 'Update Start Time', class: 'btn btn-primary' %>
+      <%= f.button :submit, 'Update Start Time', class: 'btn btn-primary', data: { disable_with: "Updating" } %>
   <% end %>
   </div>
   <%= simple_form_for game, url: game_url(game), method: 'PATCH' do |f| %>
@@ -23,6 +23,6 @@
       <%= f.input :school2_score, input_html: { value: f.object.school2_score } %>
     </div>
     <% button_text = game.is_over ? 'Update Score' : 'Submit Score' %>
-    <%= f.button :submit, button_text, class: 'btn btn-primary' %>
+    <%= f.button :submit, button_text, class: 'btn btn-primary', data: { disable_with: "Updating" } %>
   <% end %>
 </div>

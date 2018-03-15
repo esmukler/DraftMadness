@@ -7,13 +7,13 @@ class Schools < Thor
     raise "Can't find csv input. Please specify valid FILE." unless File.exist?(file)
 
     ActiveRecord::Base.transaction do
-
       region_order = []
       CSV.foreach(file, headers: true) do |row|
         seed = row['seed'].to_i
         region = row['region']
         name = row['name']
         mascot = row['mascot']
+        slug = row['slug']
         play_in_game = row['play_in_game'].present?
 
         region_order << region unless region_order.include? region
@@ -27,18 +27,19 @@ class Schools < Thor
         school = School.create!(
           name: name,
           mascot: mascot,
-          seed: seed
+          seed: seed,
+          slug: slug
         )
         puts "#{school.full_name_and_seed} created!"
       end
-
+      puts "all schools created!"
       # Create 1st round games
       region_order.each do |region|
         Seed::BRACKET_ORDER.each do |seed_num|
           create_first_round_game(region, seed_num)
         end
       end
-      puts "first round games created"
+      puts "First round games created"
 
       5.times { |num| create_games_for_round(num) }
     end

@@ -30,9 +30,10 @@ RSpec.describe LeaguesController do
       }
     end
 
+    subject { post :create, params: { league: valid_league_params } }
+
     it 'creates a valid league' do
-      expect { post :create, league: valid_league_params }.
-        to change { League.count }.by(1)
+      expect { subject }.to change { League.count }.by(1)
 
       expect(League.last.year).to eq Time.now.year
     end

@@ -9,7 +9,7 @@ class League < ApplicationRecord
   has_many :owner_schools, dependent: :destroy
   has_many :schools, through: :owner_schools
 
-  after_initialize :set_year
+  before_save :set_year
 
   attr_accessor :invite_emails
 
@@ -55,6 +55,10 @@ class League < ApplicationRecord
     end.any?
   end
 
+  def show_has_paid?
+    owners.any?(&:has_paid)
+  end
+
   private
 
   def not_too_many_owners
@@ -65,6 +69,6 @@ class League < ApplicationRecord
   private
 
   def set_year
-    self.year = Time.now.year
+    self.year = Time.now.year unless year
   end
 end
