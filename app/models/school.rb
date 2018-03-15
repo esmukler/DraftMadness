@@ -6,11 +6,9 @@ class School < ApplicationRecord
   has_many :owners, through: :owner_schools
   has_many :leagues, through: :owner_schools
 
-  after_initialize :set_year
+  scope :current, -> { where(year: Time.now.year) }
 
-  def self.current
-    where(year: Time.now.year)
-  end
+  after_initialize :set_year
 
   def self.bracket_announced?(year)
     where(year: year).count >= 64

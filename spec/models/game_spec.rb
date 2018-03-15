@@ -23,4 +23,18 @@ RSpec.describe Game do
       expect(Game.from_year(Time.now.year - 1)).to eq [old_game]
     end
   end
+
+  describe '::find_by_schools' do
+    it 'returns the proper game with schools in one order' do
+      expect(described_class.find_by_schools(game.school1, game.school2)).to eq game
+    end
+
+    it 'returns the proper game with schools in reverse order' do
+      expect(described_class.find_by_schools(game.school2, game.school1)).to eq game
+    end
+
+    it "returns nil if schools don't match any game" do
+      expect(described_class.find_by_schools(game.school2, other_school)).to be_nil
+    end
+  end
 end
