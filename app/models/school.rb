@@ -23,8 +23,17 @@ class School < ApplicationRecord
     "No. #{seed.seed_number} #{full_name}"
   end
 
+  def break_cache!
+    Rails.cache.delete(games_cache_key)
+    Rails.cache.delete(alive_cache_key)
+  end
+
+  def games_cache_key
+    "school:#{id}:games"
+  end
+
   def games
-    @games = Rails.cache.fetch "school:#{id}:games", expires_in: 1.hour do
+    @games = Rails.cache.fetch games_cache_key, expires_in: 1.hour do
       Game.where("school1_id = ? OR school2_id = ?", id, id).
            order(:round).to_a
     end
@@ -34,8 +43,12 @@ class School < ApplicationRecord
     where(year: year).select(&:alive?).count
   end
 
+  def alive_cache_key
+    "school:#{id}:alive"
+  end
+
   def alive?
-    @alive = Rails.cache.fetch "school:#{id}:alive", expires_in: 1.hour do
+    @alive = Rails.cache.fetch alive_cache_key, expires_in: 1.hour do
       Game.where(losing_team_id: id).empty? ? true : false
     end
   end

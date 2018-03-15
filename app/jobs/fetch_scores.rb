@@ -65,5 +65,7 @@ class FetchScores < ApplicationJob
         game.next_game.update!(school2_id: winning_team_id)
       end
     end
+
+    schools.each(&:break_cache!)
   end
 end
