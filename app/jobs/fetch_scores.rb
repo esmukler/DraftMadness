@@ -1,6 +1,6 @@
 class FetchScores < ApplicationJob
   def perform
-    puts "fetching scores..."
+    puts "fetching today's scores..."
     resp = RestClient.get(ncaa_scoreboard_url)
 
     fail unless resp.code.between?(200, 299)
@@ -16,8 +16,9 @@ class FetchScores < ApplicationJob
     doc = Nokogiri::HTML(resp_body)
     completed_games = doc.css('.game.final')
     completed_games.each do |game_div|
-      teams_divs = game_div.css(".linescore .linescore tr")[1..2]
+      team_divs = game_div.css(".linescore .linescore tr")[1..2]
       schools = team_divs.map { |team_div| find_school(team_div) }
+      next unless schools.compact.count == 2
 
       game = Game.find_by_schools(*schools)
       next unless game.needs_update?
@@ -30,7 +31,7 @@ class FetchScores < ApplicationJob
 
   def find_school(team_div)
     slug = find_team_slug(team_div)
-    School.find_using_slug(slug)
+    School.find_by(slug: slug)
   end
 
   def find_team_slug(team_div)
@@ -38,10 +39,11 @@ class FetchScores < ApplicationJob
   end
 
   def find_final_score(team_div)
-    team_div.css("td.final.score").first.text
+    team_div.css("td.final.score").first.text.to_i
   end
 
   def update_game(game, schools, final_scores)
+    puts "updating game between #{schools.first.name} and #{schools.last.name}"
     winning_team_id = final_scores.first > final_scores.last ? schools.first.id : schools.last.id
     losing_team_id = final_scores.first > final_scores.last ? schools.last.id : schools.first.id
 

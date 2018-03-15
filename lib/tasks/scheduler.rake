@@ -1,8 +1,7 @@
 desc "This task fetches scores"
 task :fetch_scores => :environment do
-  puts "Updating scores..."
   FetchScores.perform_now
-  puts "done."
+  puts "done"
 end
 
 desc "This task updates the schools from the play-in games"

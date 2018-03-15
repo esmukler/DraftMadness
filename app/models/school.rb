@@ -14,11 +14,6 @@ class School < ApplicationRecord
     where(year: year).count >= 64
   end
 
-  def self.find_using_slug(slug)
-    easy_result = find_by(slug: slug)
-    where("slug LIKE ?", "%#{slug}%").first
-  end
-
   def full_name
     return name unless mascot.present?
     "#{name} #{mascot}"
