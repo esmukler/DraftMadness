@@ -35,6 +35,16 @@ class Game < ApplicationRecord
     where(is_over: true).order(:start_time)
   end
 
+  def self.find_by_schools(a_school, b_school)
+    sql = "(school1_id = (:a_id) AND school2_id = (:b_id)) OR (school1_id = (:b_id) AND school2_id = (:a_id))"
+
+    where(sql, a_id: a_school.id, b_id: b_school.id).first
+  end
+
+  def needs_update?
+    !is_over && school1.present? && school2.present?
+  end
+
   def round_name
     ROUND_NAMES[round]
   end

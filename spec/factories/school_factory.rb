@@ -4,6 +4,7 @@ FactoryGirl.define do
     mascot 'Bruins'
     seed   { Seed.create(seed_number: rand(1..8), region: 'West') }
     year   Time.now.year
+    slug { name.parameterize }
 
     trait :old do
       after(:create) do |school|
