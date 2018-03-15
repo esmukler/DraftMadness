@@ -1,6 +1,6 @@
 <%= render 'header', league: @league %>
 
-<% cache("league:#{@league.id}:leaderboard", expires_in: 15.minutes) do %>
+<% cache("league:#{@league.id}:leaderboard", expires_in: 5.minutes) do %>
 
   <div class="row">
     <table class="table table-responsive table-hover table-condensed">
@@ -42,6 +42,9 @@
       <% end %>
       <tr>
         <td></td>
+        <% if @league.show_has_paid? %>
+          <td></td>
+        <% end %>
         <td></td>
         <th><%= School.left_alive_count(@league.year) %></th>
         <% 9.times do %>

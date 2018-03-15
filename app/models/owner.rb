@@ -88,9 +88,8 @@ class Owner < ApplicationRecord
   end
 
   def completed_games
-    schools.map(&:games).flatten.uniq.select(&:is_over).sort_by do |game|
-      game.start_time || Time.now
-    end
+    sql = "school1_id in (?) OR school2_id in (?)"
+    Game.completed_games.where(sql, school_ids, school_ids).order(:start_time).reverse
   end
 
   def schools_left_count
