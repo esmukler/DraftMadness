@@ -43,7 +43,7 @@ class FetchScores < ApplicationJob
   end
 
   def update_game(game, schools, final_scores)
-    puts "updating game between #{schools.first.name} and #{schools.last.name}"
+    puts "------updating game between #{schools.first.name} and #{schools.last.name}"
     winning_team_id = final_scores.first > final_scores.last ? schools.first.id : schools.last.id
     losing_team_id = final_scores.first > final_scores.last ? schools.last.id : schools.first.id
 
@@ -57,7 +57,7 @@ class FetchScores < ApplicationJob
       losing_team_id: losing_team_id,
       is_over: true
     )
-
+    puts "------#{game.winning_team.name} beat #{game.loseing_team.name}"
     if game.next_game
       if game.id < game.other_previous_game.id
         game.next_game.update!(school1_id: winning_team_id)

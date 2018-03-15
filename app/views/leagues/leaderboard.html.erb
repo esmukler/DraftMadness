@@ -1,6 +1,6 @@
 <%= render 'header', league: @league %>
 
-<% cache(@league, expires_in: 15.minutes) do %>
+<% cache("league:#{@league.id}:leaderboard", expires_in: 15.minutes) do %>
 
   <div class="row">
     <table class="table table-responsive table-hover table-condensed">
