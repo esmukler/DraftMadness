@@ -29,4 +29,20 @@ RSpec.describe League do
       expect(league.show_has_paid?).to be true
     end
   end
+
+  describe "updating year" do
+    it "updates year if no year" do
+      league = FactoryGirl.build(:league, year: nil)
+      league.save
+      expect(league.year).to eq Time.now.year
+    end
+
+    it "doesn't change year if year exists" do
+      league = FactoryGirl.build(:league, year: 2017)
+      league.save
+      expect(league.year).to eq 2017
+      league.update(name: 'other name')
+      expect(league.year).to eq 2017
+    end
+  end
 end
