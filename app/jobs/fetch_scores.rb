@@ -57,7 +57,7 @@ class FetchScores < ApplicationJob
       losing_team_id: losing_team_id,
       is_over: true
     )
-    puts "------#{game.winning_team.name} beat #{game.loseing_team.name}"
+
     if game.next_game
       if game.id < game.other_previous_game.id
         game.next_game.update!(school1_id: winning_team_id)
