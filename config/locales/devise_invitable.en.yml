@@ -21,7 +21,7 @@ en:
         hello: "Hey there, sports fan!"
         someone_invited_you: "Someone has invited you to join them in playing the Madness Draft, the bracket game that offers a new spin on the always exciting NCAA Tournament. You can accept their invitation through the link below."
         accept: "Accept invitation"
-        accept_until: "With the Round of 64 starting on Thursday, March 17. There's not much time left to sign up."
+        accept_until: "With the Round of 64 starting on Thursday, March 20. There's not much time left to sign up."
         ignore: "If you don't want to accept the invitation, please ignore this email.<br />Your account won't be created until you access the link above and set your password."
   time:
     formats:

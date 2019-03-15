@@ -42,7 +42,7 @@ group :production do
   gem 'rails_12factor'
 
   # better server
-  gem 'puma'
+  gem 'puma', '~> 3.2'
 
   gem 'memcachier'
   # caching
