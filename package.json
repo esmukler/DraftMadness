@@ -1,7 +1,7 @@
 {
   "name": "DraftMadness",
   "dependencies": {
-    "browserify": "~> 10.2.4",
+    "browserify": "^16.2.3",
     "browserify-incremental": "^3.0.1",
     "reactify": "^1.1.0"
   },
