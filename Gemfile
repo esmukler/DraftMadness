@@ -38,6 +38,10 @@ gem 'thor'
 
 gem 'rest-client'
 
+gem "sprockets", ">= 3.7.2"
+gem "actionview", ">= 5.0.7.2"
+gem "loofah", ">= 2.2.3"
+
 group :production do
   gem 'rails_12factor'
 
