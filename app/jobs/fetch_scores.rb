@@ -1,22 +1,24 @@
 class FetchScores < ApplicationJob
   def perform
     puts "fetching today's scores..."
-    resp = RestClient.get(ncaa_scoreboard_url)
+    resp = RestClient.get(cbs_scoreboard_url)
 
     fail unless resp.code.between?(200, 299)
 
     parse_site(resp.body)
   end
 
-  def ncaa_scoreboard_url
-    "https://www.ncaa.com/scoreboard/basketball-men/d1"
+  def cbs_scoreboard_url
+    "https://www.cbssports.com/college-basketball/scoreboard/"
   end
 
   def parse_site(resp_body)
     doc = Nokogiri::HTML(resp_body)
-    completed_games = doc.css('.game.final')
+    completed_games = doc.css('.single-score-card.postgame')
+
     completed_games.each do |game_div|
-      team_divs = game_div.css(".linescore .linescore tr")[1..2]
+      team_divs = game_div.css('tbody tr')
+
       schools = team_divs.map { |team_div| find_school(team_div) }
       next unless schools.compact.count == 2
 
@@ -35,11 +37,12 @@ class FetchScores < ApplicationJob
   end
 
   def find_team_slug(team_div)
-    team_div.css(".school a").first.attributes["href"].value.gsub("/schools/","")
+    href = team_div.css('a').first.attributes['href'].value
+    href.match(/college-basketball\/teams\/([\w]+)\//)[1]
   end
 
   def find_final_score(team_div)
-    team_div.css("td.final.score").first.text.to_i
+    team_div.css('td')[-1].text
   end
 
   def update_game(game, schools, final_scores)
