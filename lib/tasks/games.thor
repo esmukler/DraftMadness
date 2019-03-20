@@ -7,7 +7,7 @@ class Games < Thor
     end
 
     def convert_time(text)
-      time = Time.parse(text)
+      time = Time.zone.parse(text)
       # set it back 3 hours to make it PDT
       time - (60 * 60 * 3)
     end
