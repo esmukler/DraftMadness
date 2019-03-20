@@ -6,9 +6,18 @@ class Games < Thor
       "https://www.cbssports.com/college-basketball/schedule/NCAA/#{date}/"
     end
 
+    def convert_time(text)
+      time = Time.parse(text)
+      # set it back 3 hours to make it PDT
+      time - (60 * 60 * 3)
+    end
+
     def parse_site(resp_body)
       doc = Nokogiri::HTML(resp_body)
       game_divs = doc.css('tbody tr')
+
+      year = Time.now.year
+      date_text = date_text = doc.css('.ToggleContainer-button.is-active').text.strip()
 
       game_divs.each do |game_div|
         slugs = game_div.css('.TeamLogoNameLockup a').map do |link|
@@ -16,7 +25,13 @@ class Games < Thor
         end.uniq
         time_text = game_div.css('.CellGame a')[0].text.strip()
 
-        puts "#{slugs[0]} and #{slugs[1]} play at #{time_text}"
+
+        slug_schools = School.where(year: year, slug: slugs)
+        next if slug_schools.count < 2
+        game = Game.from_year(year).find_by_schools(*slug_schools)
+        time = convert_time("#{date_text} #{time_text}")
+        puts "#{game.schools.map(&:name).join(' and ')} start at #{time}"
+        game.update(start_time: time)
       end
     end
 
@@ -26,58 +41,11 @@ class Games < Thor
   end
 
   desc 'get_times', 'Get Game times'
-  def get_times(date)
+  def set_times(date)
     resp = RestClient.get(cbs_schedule_url(date))
 
     fail unless resp.code.between?(200, 299)
 
     parse_site(resp.body)
   end
-
-# def set_first_round_times
-#   times = [ nil,
-#     # South
-#     Time.local(2016, 'mar', 17, 13),
-#     Time.local(2016, 'mar', 18, 9, 40),
-#     Time.local(2016, 'mar', 17, 15, 50),
-#     Time.local(2016, 'mar', 18, 11),
-#     Time.local(2016, 'mar', 18, 13, 30),
-#     Time.local(2016, 'mar', 17, 18, 20),
-#     Time.local(2016, 'mar', 18, 12, 10),
-#     Time.local(2016, 'mar', 18, 10, 30),
-#     # West
-#     Time.local(2016, 'mar', 18, 16, 27),
-#     Time.local(2016, 'mar', 18, 13),
-#     Time.local(2016, 'mar', 18, 16, 20),
-#     Time.local(2016, 'mar', 17, 9, 15),
-#     Time.local(2016, 'mar', 17, 11, 45),
-#     Time.local(2016, 'mar', 18, 18, 50),
-#     Time.local(2016, 'mar', 18, 10, 30),
-#     Time.local(2016, 'mar', 18, 18, 57),
-#     # East
-#     Time.local(2016, 'mar', 17, 16, 20),
-#     Time.local(2016, 'mar', 18, 18, 20),
-#     Time.local(2016, 'mar', 18, 16, 10),
-#     Time.local(2016, 'mar', 17, 18, 40),
-#     Time.local(2016, 'mar', 17, 16, 10),
-#     Time.local(2016, 'mar', 18, 18, 40),
-#     Time.local(2016, 'mar', 18, 15, 50),
-#     Time.local(2016, 'mar', 17, 18, 50),
-#     # Midwest
-#     Time.local(2016, 'mar', 17, 12, 10),
-#     Time.local(2016, 'mar', 18, 11, 45),
-#     Time.local(2016, 'mar', 17, 16, 27),
-#     Time.local(2016, 'mar', 17, 11),
-#     Time.local(2016, 'mar', 17, 13, 30),
-#     Time.local(2016, 'mar', 17, 18, 57),
-#     Time.local(2016, 'mar', 18, 9, 15),
-#     Time.local(2016, 'mar', 18, 11, 45)
-#   ]
-#   33.times do |idx|
-#     time = times[idx]
-#     next unless time
-#     game = Game.find(idx)
-#     game.update(start_time: time)
-#   end
-# end
 end
