@@ -6,7 +6,7 @@ gem 'rails', '~> 5.0'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem "bootstrap-sass", ">= 3.4.1"
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
@@ -18,7 +18,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # authentication
-gem 'devise', '~> 4.1.0'
+gem 'devise', '~> 4.6.0'
 gem 'devise_invitable'
 
 gem 'omniauth'
@@ -41,6 +41,7 @@ gem 'rest-client'
 gem "sprockets", ">= 3.7.2"
 gem "actionview", ">= 5.0.7.2"
 gem "loofah", ">= 2.2.3"
+gem "ffi", ">= 1.9.24"
 
 group :production do
   gem 'rails_12factor'
