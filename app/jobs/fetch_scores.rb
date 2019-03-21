@@ -17,7 +17,7 @@ class FetchScores < ApplicationJob
     completed_games = doc.css('.single-score-card.postgame')
 
     completed_games.each do |game_div|
-      team_divs = game_div.css('tbody tr')
+      team_divs = game_div.css('tbody tr')[0..1]
 
       schools = team_divs.map { |team_div| find_school(team_div) }
       next unless schools.compact.count == 2
