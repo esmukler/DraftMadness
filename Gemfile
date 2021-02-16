@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.4.1'
+ruby '2.5.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0'
@@ -18,14 +18,14 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # authentication
-gem 'devise', '~> 4.6.0'
+gem 'devise', github: 'heartcombo/devise'
 gem 'devise_invitable'
 
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook', '~> 4.0'
 
-gem 'react-rails', '~> 1.6.0'
+gem 'react-rails'
 gem 'browserify-rails'
 
 gem 'simple_form'
