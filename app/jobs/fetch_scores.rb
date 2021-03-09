@@ -23,7 +23,7 @@ class FetchScores < ApplicationJob
       next unless schools.compact.count == 2
 
       game = Game.find_by_schools(*schools)
-      next unless game.needs_update?
+      next unless game && game.needs_update?
 
       final_scores = team_divs.map { |team_div| find_final_score(team_div) }
 
