@@ -32,7 +32,37 @@ class OneTime < Thor
     end
   end
 
+  desc 'print points', 'Print new point totals from CSV'
+  def print_points(csv)
+    raise "Can't find csv input. Please specify valid FILE." unless File.exist?(csv)
+    r64_points = []
+    r32_points = []
+    s16_points = []
+    e8_points = []
+    ff_points = []
+    nc_points = []
+    tot_points = []
 
+    CSV.foreach(csv, headers: true, header_converters: :symbol) do |row|
+      r64_points.push(row[:r64].to_f.round(2))
+      r32_points.push(row[:r32].to_f.round(2))
+      s16_points.push(row[:s16].to_f.round(2))
+      e8_points.push(row[:e8].to_f.round(2))
+      ff_points.push(row[:f4].to_f.round(2))
+      nc_points.push(row[:ncg].to_f.round(2))
+      total = %i(r64 r32 s16 e8 f4 ncg).inject(0) do |sum, sym|
+        sum + row[sym].to_f.round(2)
+      end
+      tot_points.push(total.round(2))
+    end
+    puts(r64_points.to_s)
+    puts(r32_points.to_s)
+    puts(s16_points.to_s)
+    puts(e8_points.to_s)
+    puts(ff_points.to_s)
+    puts(nc_points.to_s)
+    puts(tot_points.to_s)
+  end
 
   no_commands do
     def get_drafter(current_pick)
