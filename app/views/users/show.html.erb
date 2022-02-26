@@ -51,7 +51,7 @@
       <th>Points</th>
       <th>Ranking</th>
     </tr>
-    <% @user.owners.old.each do |owner| %>
+    <% @owners_by_league.each do |owner| %>
       <tr>
         <td><%= link_to owner.league.name, league_leaderboard_path(owner.league) %></td>
         <td><%= owner.league.year %></td>

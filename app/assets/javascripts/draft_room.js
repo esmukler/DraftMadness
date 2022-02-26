@@ -1,8 +1,7 @@
 (function() {
   // the rest of this function will only load on '/leagues/:id/draft_room'
   $('body').on('leagues:draft_room', function() {
-
-      var DraftRoom = require('components/draft-room');
+      // var DraftRoom = require('components/draft-room');
 
       var el = $('.draft-room-container');
       if (el.length) {
@@ -13,7 +12,7 @@
               type: 'GET',
               dataType: 'json',
               success: function(data) {
-                  ReactDOM.render(React.createElement(DraftRoom, data), $(el)[0]);
+                  // ReactDOM.render(React.createElement(DraftRoom, data), $(el)[0]);
               }
           });
       }

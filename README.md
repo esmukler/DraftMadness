@@ -1,4 +1,4 @@
-# Madness Draft 2018
+# Madness Draft
 
 A Fantasy Draft game for the NCAA Men's Basketball Tournament.
 

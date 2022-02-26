@@ -1,5 +1,4 @@
 (function() {
-
     var triggerEvents = function(body) {
         var pageID = body.attr('class');
         pageID = pageID.replace(' ', ':')

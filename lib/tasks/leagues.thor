@@ -18,8 +18,10 @@ class Leagues < Thor
         motto: "I'm the best."
       )
       idx = 1
+      current_year = Time.now.year
       until league.full? do
-        user = User.create!(email: "sim_#{idx}@example.com", password: 'password')
+        user = User.create!(email: "sim_#{idx}_#{current_year}@example.com", password: 'password')
+        puts "#{user.email} created"
         owner = user.owners.create!(team_name: "drafter_#{idx}", motto: "I'm the No. #{idx} best player", league: league)
         idx += 1
       end

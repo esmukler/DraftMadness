@@ -2,6 +2,8 @@
 
 <h3 class="text-center">Welcome to the Draft Room</h3>
 
+<%= javascript_pack_tag 'hello_react' %>
+
 <% if @league.full? %>
   <div class="draft-room-container" data-league-id="<%= @league.id %>">
   </div>

@@ -17,6 +17,8 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
+gem 'webpacker', '~> 5.x'
+
 # authentication
 gem 'devise', github: 'heartcombo/devise'
 gem 'devise_invitable'
