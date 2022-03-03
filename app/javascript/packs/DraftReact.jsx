@@ -5,6 +5,6 @@ import DraftRoom from './DraftRoom';
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <DraftRoom name="React" />,
-    document.body.appendChild(document.createElement('div')),
+    document.getElementById('draft-room-container'),
   )
 });
