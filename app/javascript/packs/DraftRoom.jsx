@@ -78,7 +78,7 @@ class DraftRoom extends React.Component {
 
     const data = {
       owner_school: {
-        owner_id: this.state.current_owner.id,
+        owner_id: this.state.currentOwner.id,
         school_id: chosenSchoolID,
         league_id: this.state.league.id,
         draft_pick: this.state.currentDraftPick,
@@ -87,9 +87,8 @@ class DraftRoom extends React.Component {
 
     axios
       .post(url, data)
-      .then(data => {
-        const { school, current_owner_turn: currentOwnerTurn } = data;
-        const schoolID = school.id;
+      .then(resp => {
+        const { school, current_owner_turn: currentOwnerTurn } = resp.data;
         const currentDraftPick = this.state.currentDraftPick + 1;
         const blockedRegions = this.state.blockedRegions.concat(school.region)
 
@@ -98,8 +97,8 @@ class DraftRoom extends React.Component {
           currentDraftPick,
           blockedRegions,
         });
-        this.updateSchool(schoolID);
-        this.fetchOwners();
+        this.updateSchool(school.id);
+        this.fetchOwners(this.state.league.id);
       });
   };
 
