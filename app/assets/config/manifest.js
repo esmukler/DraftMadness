@@ -6,9 +6,4 @@
 //= link login.scss
 //= link school_rows.scss
 //
-//= link application.js
-//= link components.js
-//= link draft_room.js
-//= link init.js
-//
 //= link bball-icon.png
