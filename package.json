@@ -16,7 +16,8 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 0.10"
+    "node": ">= 0.10",
+    "node": "< 17.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3"
