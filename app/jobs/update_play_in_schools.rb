@@ -8,7 +8,9 @@ class UpdatePlayInSchools < ApplicationJob
   end
 
   def cbs_scoreboard_url
-    "https://www.cbssports.com/college-basketball/scoreboard/20210318"
+    todays_date = Date.today
+    string_date = todays_date.strftime("%Y%m%d")
+    "https://www.cbssports.com/college-basketball/scoreboard/#{string_date}"
   end
 
   def parse_site(resp_body)
