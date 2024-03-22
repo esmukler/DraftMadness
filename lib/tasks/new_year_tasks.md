@@ -9,10 +9,12 @@ Local Tests:
 - Run the import task.
 `thor schools:import_schools db/20XX_teams.csv`
 
+## Need to fix:
+1. Draft Order Randomizer always leaves one team blank
+2. Sometimes the React draft selection saves the wrong draft pick number on the drafted owner_school
 
 ## Nice-to-haves:
 
 1. Give each owner a place for a gif.
 2. Add auto-draft checkbox.
-3. Allow "update play in schools" task to accept dates as inputs
-4. Automate the last overall pick.
+3. Allow "update play in schools" task to accept dates as inputs and be run from the command line

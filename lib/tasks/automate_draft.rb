@@ -9,7 +9,7 @@ def automate_draft(league_id)
   fake_cdp = league.current_draft_pick
 
   ActiveRecord::Base.transaction do
-    until schools.empty?
+    while schools.count > 1
       school = schools.shift
       owner = owners[owner_idx]
       create_os(owner, school)
