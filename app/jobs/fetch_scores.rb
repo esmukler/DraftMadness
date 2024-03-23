@@ -42,7 +42,7 @@ class FetchScores < ApplicationJob
   end
 
   def find_final_score(team_div)
-    team_div.css('td')[-1].text
+    team_div.css('td')[-1].text.to_i
   end
 
   def update_game(game, schools, final_scores)
