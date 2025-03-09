@@ -20,6 +20,6 @@
     "node": "< 17.0"
   },
   "devDependencies": {
-    "webpack-dev-server": "^3"
+    "webpack-dev-server": "^5"
   }
 }
