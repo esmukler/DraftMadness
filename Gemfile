@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.6.6'
+ruby '3.2.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.7'
@@ -45,6 +45,7 @@ gem "actionview", ">= 5.0.7.2"
 gem "loofah", ">= 2.2.3"
 gem "ffi", ">= 1.9.24"
 gem 'concurrent-ruby', '1.3.4'
+gem 'nokogiri', "~> 1.18.3"
 
 group :production do
   gem 'rails_12factor'
