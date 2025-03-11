@@ -98,4 +98,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   CONTACT_EMAIL = 'draftmadnessgame@gmail.com'
+
+  config.active_storage.service = :local
 end
