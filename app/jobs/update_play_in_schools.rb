@@ -1,27 +1,42 @@
 class UpdatePlayInSchools < ApplicationJob
-  def perform
+  def perform(custom_date_string = nil)
+    @date_string = calculate_date(custom_date_string)
     resp = RestClient.get(cbs_scoreboard_url)
 
     fail unless resp.code.between?(200, 299)
 
     parse_site(resp.body)
+    return 'Play In Schools updated'
   end
 
-  def cbs_scoreboard_url
+  def calculate_date(custom_date_string)
+    if custom_date_string
+      begin
+         Date.parse(custom_date_string)
+         return custom_date_string
+      rescue Date::Error
+      end
+    end
     todays_date = Date.today
-    string_date = todays_date.strftime("%Y%m%d")
-    "https://www.cbssports.com/college-basketball/scoreboard/#{string_date}"
+    return todays_date.strftime("%Y%m%d")
+  end
+
+
+  def cbs_scoreboard_url
+    "https://www.cbssports.com/college-basketball/scoreboard/#{@date_string}"
   end
 
   def parse_site(resp_body)
     doc = Nokogiri::HTML(resp_body)
     completed_games = doc.css('.single-score-card.postgame')
+    puts "#{completed_games.length} games completed on this date"
 
     completed_games.each do |game_div|
       team_divs = game_div.css('tbody tr')[0..1]
 
       play_in_school, in_order = find_play_in_schools(team_divs)
       next unless play_in_school
+      puts "Play In School updating: #{play_in_school.name}"
 
       scores = team_divs.map { |team_div| find_final_score(team_div) }
       first_is_winner = determine_winner(scores, in_order)
