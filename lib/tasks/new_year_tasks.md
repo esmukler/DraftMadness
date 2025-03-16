@@ -15,6 +15,6 @@ Local Tests:
 
 ## Nice-to-haves:
 
-1. Give each owner a place for a gif.
+1. Allow "update play in schools" task to accept dates as inputs and be run from the command line
 2. Add auto-draft checkbox.
-3. Allow "update play in schools" task to accept dates as inputs and be run from the command line
+3. Give each owner a place for a gif.

@@ -9,7 +9,7 @@ class Owner < ApplicationRecord
   validates :team_name, :user, :league, presence: true
   validates :user, uniqueness: { scope: :league, message: 'you may only have one owner per league' }
 
-  after_create :set_draft_order
+  after_commit :set_draft_order, on: :create
 
   attr_accessor :league_password
 

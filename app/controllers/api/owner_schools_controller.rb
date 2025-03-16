@@ -2,14 +2,18 @@ class Api::OwnerSchoolsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def create
-    @owner = Owner.find(os_params[:owner_id].to_i)
+    ActiveRecord::Base.transaction do
+      @owner = Owner.find(os_params[:owner_id].to_i)
 
-    @owner_school = OwnerSchool.create!(os_params)
+      @owner_school = OwnerSchool.create!(os_params)
 
-    @owner.league.current_draft_pick += 1
-    @owner.league.save
+      league = @owner.league
+      league.increment!(:current_draft_pick)
 
-    render 'show'
+      render 'show'
+    end
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved => e
+    render json: { error: e.message }, status: :unprocessable_entity
   end
 
   private
