@@ -11,6 +11,7 @@ Local Tests:
 
 ## Nice-to-haves:
 
-1. Auto-draft the last draft selection.
-2. Add auto-draft checkbox.
-3. Give each owner a place for a gif.
+1. Automate or make it easier to input actual game times
+2. Add checkbox inputs for recording whether an owner has paid
+3. Add auto-draft checkbox.
+4. Give each owner a place for a gif.
