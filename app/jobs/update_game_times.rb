@@ -63,11 +63,17 @@ class UpdateGameTimes < ApplicationJob
       return
     end
 
-    formatted_start_time = Time.strptime("#{date} #{start_time}", "%Y%m%d %I:%M %p")
-    if game.update!(start_time: formatted_start_time)
-      puts "updated Game #{game.id} to #{formatted_start_time}"
+    pacific_time = convert_to_pacific_time(date, start_time)
+    
+    if game.update!(start_time: pacific_time)
+      puts "updated Game #{game.id} to #{pacific_time} (Pacific Time)"
     else
       puts "failed to update Game #{game.id}"
     end
+  end
+
+  def convert_to_pacific_time(date, start_time)
+    eastern_time = Time.strptime("#{date} #{start_time} EDT", "%Y%m%d %I:%M %p %Z")
+    eastern_time.in_time_zone('Pacific Time (US & Canada)')
   end
 end
