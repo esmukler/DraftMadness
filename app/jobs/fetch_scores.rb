@@ -1,15 +1,15 @@
 class FetchScores < ApplicationJob
-  def perform
-    puts "fetching today's scores..."
-    resp = RestClient.get(cbs_scoreboard_url)
+  def perform(date = nil)
+    puts "fetching scores from #{date || 'today'}..."
+    resp = RestClient.get(cbs_scoreboard_url(date))
 
     fail unless resp.code.between?(200, 299)
 
     parse_site(resp.body)
   end
 
-  def cbs_scoreboard_url
-    "https://www.cbssports.com/college-basketball/scoreboard/"
+  def cbs_scoreboard_url(date)
+    "https://www.cbssports.com/college-basketball/scoreboard/#{date}"
   end
 
   def parse_site(resp_body)
