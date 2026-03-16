@@ -6,6 +6,7 @@ Local Tests:
 
 2. Import Schools
 - Add a new CSV of schools (e.g. db/20XX_teams.csv).
+- Ensure that the regions are ordered so the first two regions listed play each other in one of the semifinals.
 - Run the import task.
 `thor schools:import_schools db/20XX_teams.csv`
 

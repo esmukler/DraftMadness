@@ -41,6 +41,21 @@ class Game < ApplicationRecord
     where(sql, a_id: a_school.id, b_id: b_school.id).first
   end
 
+  # Returns { 0 => [games], 1 => [games], ..., 5 => [championship] } in bracket display order
+  # (top-down from championship so region/Final Four pairings are correct). Nil if no championship.
+  def self.bracket_games_by_round(year)
+    championship = from_year(year).find_by(round: 5)
+    return nil unless championship
+
+    games_by_round = { 5 => [championship] }
+    games_by_round[4] = championship.previous_games.order(:id).to_a
+    games_by_round[3] = games_by_round[4].flat_map { |g| g.previous_games.order(:id).to_a }
+    games_by_round[2] = games_by_round[3].flat_map { |g| g.previous_games.order(:id).to_a }
+    games_by_round[1] = games_by_round[2].flat_map { |g| g.previous_games.order(:id).to_a }
+    games_by_round[0] = games_by_round[1].flat_map { |g| g.previous_games.order(:id).to_a }
+    games_by_round
+  end
+
   def needs_update?
     !is_over && school1.present? && school2.present?
   end
