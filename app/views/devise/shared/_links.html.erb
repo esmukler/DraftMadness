@@ -29,6 +29,7 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
+    <%- next if provider == :facebook -%>
     <div class="text-center">
       <%= link_to "Log In with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: 'btn btn-default' %>
     </div>
