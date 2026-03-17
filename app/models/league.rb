@@ -55,6 +55,21 @@ class League < ApplicationRecord
     end.any?
   end
 
+  # Returns the owner whose turn it is (snake draft), or nil if draft is over.
+  def owner_with_current_turn
+    pick = current_draft_pick
+    return nil if pick > 64
+
+    cycle = (pick - 1) / 16
+    pos = (pick - 1) % 16
+    draft_pick = if cycle.even?
+      pos < 8 ? pos + 1 : 16 - pos
+    else
+      pos < 8 ? 8 - pos : pos - 7
+    end
+    owners.find_by(draft_pick: draft_pick)
+  end
+
   def show_has_paid?
     owners.any?(&:has_paid)
   end

@@ -10,6 +10,8 @@ class Api::OwnerSchoolsController < ApplicationController
       league = @owner.league
       league.increment!(:current_draft_pick)
 
+      DraftTurnSms.send_for_league(league, @owner_school)
+
       render 'show'
     end
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved => e
