@@ -10,9 +10,10 @@ Local Tests:
 - Run the import task.
 `thor schools:import_schools db/20XX_teams.csv`
 
-## Nice-to-haves:
+Optional 3. Local Sim Automate Draft:
+- `AutomateDraftJob.perform_now(League.last.id)`
 
-1. Automate or make it easier to input actual game times
-2. Add checkbox inputs for recording whether an owner has paid
-3. Add auto-draft checkbox.
-4. Give each owner a place for a gif.
+4. Update Play-In Schools
+- e.g. `rake "update_play_in_schools[20250314]"` for each play-in date
+
+5. Turn On Update Scores + Game Times scheduled jobs in Heroku
