@@ -71,6 +71,18 @@ class Owner < ApplicationRecord
     league.owners.count == 8
   end
 
+  def draft(school)
+    os = OwnerSchool.create(
+      owner: self,
+      league: league,
+      school: school,
+      draft_pick: league.current_draft_pick
+    )
+    league.current_draft_pick += 1
+    league.save
+    os
+  end
+
   def current_turn?
     league.turn_for?(self)
   end

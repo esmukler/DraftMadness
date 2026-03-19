@@ -11,7 +11,7 @@ class AutomateDraftJob < ApplicationJob
       while schools.any?
         school = schools.shift
         owner = owners[owner_idx]
-        create_os(owner, school)
+        owner.draft(school)
         owner_idx, forward_direction = update_markers(owner_idx, forward_direction)
       end
     end
@@ -65,16 +65,5 @@ class AutomateDraftJob < ApplicationJob
     School.current.includes(:seed).where.not(id: league.school_ids).sort_by do |school|
       [school.seed_number, rand(4)]
     end
-  end
-
-  def create_os(owner, school)
-    os = OwnerSchool.create(
-      owner: owner,
-      league: owner.league,
-      school: school,
-      draft_pick: owner.league.current_draft_pick
-    )
-    owner.league.current_draft_pick += 1
-    owner.league.save
   end
 end

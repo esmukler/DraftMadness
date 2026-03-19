@@ -78,14 +78,8 @@ class OneTime < Thor
       draft_pick = get_drafter(league.current_draft_pick)
       owner = league.owners.find_by_draft_pick(draft_pick)
       puts(draft_pick) unless owner
-      os = OwnerSchool.create(
-        owner: owner,
-        league: league,
-        school: school,
-        draft_pick: league.current_draft_pick
-      )
-      owner.league.current_draft_pick += 1
-      owner.league.save
+      os = owner.draft(school)
+      os
     end
   end
 end
