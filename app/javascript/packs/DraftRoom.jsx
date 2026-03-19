@@ -80,8 +80,6 @@ class DraftRoom extends React.Component {
       owner_school: {
         owner_id: this.state.currentOwner.id,
         school_id: chosenSchoolID,
-        league_id: this.state.league.id,
-        draft_pick: this.state.currentDraftPick,
       },
     };
 

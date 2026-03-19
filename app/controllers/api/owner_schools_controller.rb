@@ -5,9 +5,15 @@ class Api::OwnerSchoolsController < ApplicationController
     ActiveRecord::Base.transaction do
       @owner = Owner.find(os_params[:owner_id].to_i)
 
-      @owner_school = OwnerSchool.create!(os_params)
+      league = League.lock.find(@owner.league_id)
 
-      league = @owner.league
+      @owner_school = OwnerSchool.create!(
+        owner: @owner,
+        league: league,
+        school_id: os_params[:school_id],
+        draft_pick: league.current_draft_pick
+      )
+
       league.increment!(:current_draft_pick)
 
       render 'show'
@@ -19,6 +25,6 @@ class Api::OwnerSchoolsController < ApplicationController
   private
 
   def os_params
-    hash = params.require(:owner_school).permit(:owner_id, :school_id, :draft_pick, :league_id)
+    params.require(:owner_school).permit(:owner_id, :school_id)
   end
 end
