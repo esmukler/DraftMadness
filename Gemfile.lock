@@ -110,6 +110,10 @@ GEM
       devise (>= 4.6)
     diff-lcs (1.6.0)
     domain_name (0.6.20240107)
+    dotenv (3.2.0)
+    dotenv-rails (3.2.0)
+      dotenv (= 3.2.0)
+      railties (>= 6.1)
     erubi (1.13.1)
     execjs (2.10.0)
     factory_girl (4.9.0)
@@ -365,6 +369,7 @@ DEPENDENCIES
   dalli
   devise!
   devise_invitable
+  dotenv-rails
   factory_girl_rails
   ffi (>= 1.9.24)
   jbuilder (~> 2.0)
